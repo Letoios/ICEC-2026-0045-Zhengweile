@@ -15,7 +15,7 @@
 | `process_logs/` | 按日期的过程记录（7 份），记录当时为什么这么采、遇到什么问题 |
 | `raw_output/extract_15组.txt` | 15 组指标重算的纯文本输出，可与 Excel 逐行对照 |
 
-原始数据副本不在本包内，在上一层的 `../data/` 里：每组一个目录，含 `Amplitudes.csv`（Phyphox 原始 20 Hz 序列）+ `meta.txt`（设备、时间、偏移、SHA256、指标）。
+原始数据副本不在本包内，在上一层的 `../data/` 里：每组一个目录，含 `Amplitudes.csv`（Phyphox 原始约 9.2 Hz 序列）+ `meta.txt`（设备、时间、偏移、SHA256、指标）。
 
 ---
 
@@ -56,7 +56,7 @@ Phyphox 的每个 zip 里都有 `meta/time.csv`，记录 START / PAUSE 两个事
 "fileFormat","1.20"
 ```
 
-15 组里 14 组是 PLK110，1 组（晚上图书馆）是 PKG110 —— 这个不一致**没有被抹平**，原样登记在表里并写进 `ANOMALIES.md` 的 A-01。
+初查时 15 组里有 1 组（晚上图书馆）是 PKG110，经追查是同学用另一台手机录的重复件；已改用本人当晚的 PLK110 原始导出文件夹，现 15 组全部同一台手机。这段排查记在 `ANOMALIES.md` 的 A-01，没有抹掉。
 
 ---
 
