@@ -1,6 +1,6 @@
 ﻿序号,原始zip,Phyphox起始时间(UTC+8),结束时间(UTC+8),时长s,采样率Hz,品牌,型号,主板代号,加速度传感器,加速度行数,SHA256前16,对应交付目录
 1,静止 2026-10-24 18-00-40.zip,2026-10-24 17:59:31.870 UTC+08:00,2026-10-24 18:00:23.113 UTC+08:00,51.2,480,OnePlus,PLK110,canoe,lsm6dsv Accelerometer Non-wakeup,24587,dd407c42eae86f67,01_still
-2,走路 2026-10-24 17-56-11(3).zip,2026-10-24 17:54:17.022 UTC+08:00,2026-10-24 17:55:53.306 UTC+08:00,96.2,480,OnePlus,PLK110,canoe,lsm6dsv Accelerometer Non-wakeup,46209,c63c10c54dcd5062,—
+2,走路 2026-10-24 17-56-11(3).zip,2026-10-24 17:54:17.022 UTC+08:00,2026-10-24 17:55:53.306 UTC+08:00,96.2,480,OnePlus,PLK110,canoe,lsm6dsv Accelerometer Non-wakeup,46209,c63c10c54dcd5062,02_walk
 3,跑步 2026-10-24 18-04-02(1).zip,2026-10-24 18:03:23.368 UTC+08:00,2026-10-24 18:03:51.700 UTC+08:00,28.3,480,OnePlus,PLK110,canoe,lsm6dsv Accelerometer Non-wakeup,13591,8e75a7755e4ebe86,03_run
 4,上楼梯.zip,2026-10-25 15:41:41.067 UTC+08:00,2026-10-25 15:42:31.469 UTC+08:00,49.1,480,OnePlus,PLK110,canoe,lsm6dsv Accelerometer Non-wakeup,23567,6edbdf119bbdfa90,04_stairs_up
 5,下楼.zip,2026-10-25 15:38:11.874 UTC+08:00,2026-10-25 15:39:16.810 UTC+08:00,64.9,480,OnePlus,PLK110,canoe,lsm6dsv Accelerometer Non-wakeup,31157,534d4e1529408639,05_stairs_down
