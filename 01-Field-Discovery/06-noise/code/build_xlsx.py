@@ -14,8 +14,11 @@ from openpyxl.chart.label import DataLabelList
 from openpyxl.formatting.rule import ColorScaleRule, CellIsRule
 from openpyxl.worksheet.datavalidation import DataValidation
 
-BUILD = r"D:\deepseek工作\noise06\build"
-DELIVER = r"D:\deepseek工作\noise06\deliver"
+HERE = os.path.dirname(os.path.abspath(__file__))
+PKG = os.path.dirname(HERE) if os.path.basename(HERE) == "code" else os.path.join(HERE, "deliver")
+RES = os.path.join(HERE, "build") if os.path.isdir(os.path.join(HERE, "build")) else os.path.join(PKG, "results")
+BUILD = RES
+DELIVER = PKG
 OUT = os.path.join(DELIVER, "数据", "课题06_十五组声学数据表与雷达图.xlsx")
 
 NAVY = "1F3864"
@@ -357,8 +360,8 @@ def main():
     TIMING = [
         ("刷新周期", "1 s", "每秒采样一次，人察觉不到延迟"),
         ("上升沿", "即时切换（连续 3 s 确认）", "安全优先，宁可早报不可晚报"),
-        ("下降沿", "低于下一档阈值 2 dB 且保持 5 s 才降级", "回差 + 保持，防止临界抖动"),
-        ("最短保持", "任一超标状态 ≥ 10 s", "防止一次咳嗽让灯闪一下又灭"),
+        ("下降沿", "边界 ±1 dB 对称带，保持 2 s", "升档也要跨带，平衡点不下移"),
+        ("最短保持", "任一超标状态 ≥ 10 s", "兜底：实测很少触发，见回放仿真说明"),
         ("优先级", "SP > S4 > S3 > S2 > S1 > S0", "高优先级可立即抢占，低优先级不得覆盖高优先级"),
         ("夜间模式", "22:00—6:00 亮度 ×0.4、频率上限 1 Hz", "避免「治理噪声」反而制造光污染"),
         ("冲击通道", "Lmax ≥ 85 dB(A) 立即触发，3 s 后回退", "不参与平滑、不排队去抖"),

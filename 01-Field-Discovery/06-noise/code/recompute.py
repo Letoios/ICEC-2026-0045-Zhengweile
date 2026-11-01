@@ -19,7 +19,7 @@ import csv
 import math
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PKG = os.path.dirname(HERE)
+PKG = os.path.dirname(HERE) if os.path.basename(HERE) == "code" else os.path.join(HERE, "deliver")
 DATA = os.path.join(PKG, "data")
 
 # 点位 -> (功能区, 昼间限值, 夜间限值)   GB 3096-2008

@@ -1,0 +1,162 @@
+[
+ {
+  "variant": "A 原设计（1 s 输入·单边回差）",
+  "confirm": 2.0,
+  "flicker": 43,
+  "agree1": 67.23,
+  "agree3": 72.06,
+  "within1": 98.28
+ },
+ {
+  "variant": "A 原设计（1 s 输入·单边回差）",
+  "confirm": 3.0,
+  "flicker": 28,
+  "agree1": 71.0,
+  "agree3": 75.27,
+  "within1": 97.6
+ },
+ {
+  "variant": "A 原设计（1 s 输入·单边回差）",
+  "confirm": 4.0,
+  "flicker": 28,
+  "agree1": 68.44,
+  "agree3": 72.08,
+  "within1": 94.51
+ },
+ {
+  "variant": "A 原设计（1 s 输入·单边回差）",
+  "confirm": 5.0,
+  "flicker": 20,
+  "agree1": 69.45,
+  "agree3": 72.51,
+  "within1": 92.38
+ },
+ {
+  "variant": "B 对称回差（1 s 输入）",
+  "confirm": 2.0,
+  "flicker": 27,
+  "agree1": 70.87,
+  "agree3": 74.94,
+  "within1": 98.77
+ },
+ {
+  "variant": "B 对称回差（1 s 输入）",
+  "confirm": 3.0,
+  "flicker": 19,
+  "agree1": 72.39,
+  "agree3": 75.45,
+  "within1": 97.6
+ },
+ {
+  "variant": "B 对称回差（1 s 输入）",
+  "confirm": 4.0,
+  "flicker": 19,
+  "agree1": 71.47,
+  "agree3": 74.68,
+  "within1": 94.45
+ },
+ {
+  "variant": "B 对称回差（1 s 输入）",
+  "confirm": 5.0,
+  "flicker": 17,
+  "agree1": 69.1,
+  "agree3": 71.94,
+  "within1": 92.08
+ },
+ {
+  "variant": "C 3 s 输入·对称回差",
+  "confirm": 2.0,
+  "flicker": 34,
+  "agree1": 69.05,
+  "agree3": 73.64,
+  "within1": 98.26
+ },
+ {
+  "variant": "C 3 s 输入·对称回差",
+  "confirm": 3.0,
+  "flicker": 31,
+  "agree1": 69.32,
+  "agree3": 73.0,
+  "within1": 97.3
+ },
+ {
+  "variant": "C 3 s 输入·对称回差",
+  "confirm": 4.0,
+  "flicker": 20,
+  "agree1": 71.95,
+  "agree3": 75.13,
+  "within1": 96.93
+ },
+ {
+  "variant": "C 3 s 输入·对称回差",
+  "confirm": 5.0,
+  "flicker": 19,
+  "agree1": 70.41,
+  "agree3": 73.67,
+  "within1": 95.55
+ },
+ {
+  "variant": "D 3 s 输入·回差 1 dB",
+  "confirm": 2.0,
+  "flicker": 45,
+  "agree1": 70.84,
+  "agree3": 77.69,
+  "within1": 98.05
+ },
+ {
+  "variant": "D 3 s 输入·回差 1 dB",
+  "confirm": 3.0,
+  "flicker": 35,
+  "agree1": 72.92,
+  "agree3": 78.97,
+  "within1": 96.9
+ },
+ {
+  "variant": "D 3 s 输入·回差 1 dB",
+  "confirm": 4.0,
+  "flicker": 22,
+  "agree1": 72.76,
+  "agree3": 76.53,
+  "within1": 96.93
+ },
+ {
+  "variant": "D 3 s 输入·回差 1 dB",
+  "confirm": 5.0,
+  "flicker": 21,
+  "agree1": 71.03,
+  "agree3": 74.87,
+  "within1": 95.55
+ },
+ {
+  "variant": "E 3 s 输入·回差 2 dB·确认 2 s",
+  "confirm": 2.0,
+  "flicker": 34,
+  "agree1": 69.05,
+  "agree3": 73.64,
+  "within1": 98.26
+ },
+ {
+  "variant": "E 3 s 输入·回差 2 dB·确认 2 s",
+  "confirm": 3.0,
+  "flicker": 31,
+  "agree1": 69.32,
+  "agree3": 73.0,
+  "within1": 97.3
+ },
+ {
+  "variant": "E 3 s 输入·回差 2 dB·确认 2 s",
+  "confirm": 4.0,
+  "flicker": 20,
+  "agree1": 71.95,
+  "agree3": 75.13,
+  "within1": 96.93
+ },
+ {
+  "variant": "E 3 s 输入·回差 2 dB·确认 2 s",
+  "confirm": 5.0,
+  "flicker": 19,
+  "agree1": 70.41,
+  "agree3": 73.67,
+  "within1": 95.55
+ }
+]

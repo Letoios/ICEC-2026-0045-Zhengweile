@@ -1,3 +1,20 @@
+## 先看这条：这些脚本在本包里能直接跑
+
+`code/` 下每个脚本都按**双布局**解析路径：脚本位于本包的 `code/` 里时，数据取本包 `data/`、中间件取本包 `results/`、图与文档写回本包 `figs/`、`docs/`、`数据/`；脚本仍放在作者工作区（`D:\deepseek工作\noise06`）时，中间件沿用工作区的 `build/`。同一份代码两条路都能走，不用改任何常量。
+
+| 能在包内直接跑（只读本包 `data/` + `results/`） | 需要原始采集目录（`D:\分贝项目`，无法随包提供） |
+|---|---|
+| `recompute.py` 复核 15 组指标 | `extract.py`：原始 zip → `stats.json` |
+| `robust.py` → `figrobust.py` 稳健性分析 + fig13/fig14 | `meta.py`：设备型号、校准偏移、双源 |
+| `gum.py` 不确定度预算 | `evidence.py`：采集证明 CSV、SHA256 |
+| `sim.py` → `events.py` → `sim2.py` → `sim3.py` → `sim4.py` → `figsim.py` → `figacc.py` → `gen_simdoc.py`（回放仿真 + fig8–fig12 + 本文档） | |
+| `figs.py`（fig1–fig6）、`figmap.py`（fig7） | |
+| `build_xlsx.py` 重建 `数据/*.xlsx`（需 openpyxl） | |
+
+生成图所需的中间件（`stats.json`、`meta.json`、`sim_runs/sim_sweep/sim2–4.json`、`events.json`、`robust.json`、`gum.json`）全部随包放在 `results/`，底图 `campus_map.jpg` 放在 `data/`。
+
+**已实测**（2026-11-01，Python 3.12 + Pillow 12.3 + openpyxl 3.1.5）：在包内重跑上面整条流水线，`figs/` 下 14 张图与随包版本**逐字节一致**（SHA256 相同），`数据/*.xlsx` 复算后 960 个单元格取值**全部一致**（xlsx 是 zip 容器，字节比较无意义）。也就是说这些图确实是这串脚本从 `data/` 算出来的，不是手画的。
+
 # 课题 06　生成脚本说明
 
 这个目录是这个交付包里**每一个数字、每一张图**的来源。分两类：
@@ -68,3 +85,41 @@ python evidence.py       # → 证据包/（采集证明、SHA256、日志骨架
 3. **重力方向必须按时间插值，不能按行号对齐**。加速度 480 Hz、重力 200 Hz，行号对不上。
 4. **晚上图书馆那一组的 zip 不是本人数据**（同学用 PKG110 录的重复件），
    本人的是未压缩文件夹，脚本里用 `SOURCE_OVERRIDE` 显式指定——这是 ANOMALIES A-01 的处理方式。
+
+## 回放仿真（创新五）
+
+| 文件 | 作用 | 输入 | 输出 |
+|---|---|---|---|
+| `sim.py` | 把 `data/` 里的 15 段序列逐秒灌进光效状态机，统计切换次数与驻留 | `data/` | `build/sim_runs.json`、`build/sim_sweep.json` |
+| `sim2.py` | 逐秒一致率、闪烁-准确率帕累托前沿、冲击阈值敏感性 | `data/` + `sim.py` 的函数 | `build/sim2.json` |
+| `sim3.py` | 三处改动的消融：换基准 / 对称回差 / 3 s 输入 | `data/` | `build/sim3.json` |
+| `sim4.py` | 保持时长 × 最短驻留扫描 | `data/` | `build/sim4.json` |
+| `figacc.py` | fig12 准确率提升路径 | `build/sim3.json` + `sim4.json` | `figs/fig12` |
+| `events.py` | 事件归因：高于本段 L90+10 dB 的样本占总能量多少 | `data/` | `build/events.json` |
+| `figsim.py` | 画 fig8 灯色时间线、fig9 参数扫描矩阵、fig10 能量构成 | 上面两个 json | `figs/fig8–10` |
+| `gen_simdoc.py` | 生成 `docs/回放仿真说明.md`（表格由数据算出，不手抄） | 上面三个 json | 该 md |
+
+运行顺序：
+
+```
+python sim.py
+python events.py
+python sim2.py
+python sim3.py
+python sim4.py
+python figsim.py
+python figacc.py
+python gen_simdoc.py
+```
+
+注意：这四个脚本假设工作目录是包根（与 `data/`、`build/` 同级），
+`build/` 不存在时先建。
+
+### 稳健性分析（结果 13 / 14）
+
+| 脚本 | 作用 | 输入 | 输出 |
+|---|---|---|---|
+| `robust.py` | bootstrap 置信区间、翻转率、整体偏移扫描、时长收敛 | 本包 `data/`、`results/stats.json` | `results/robust.json` + 屏幕表格 |
+| `figrobust.py` | 画两张图 | `results/robust.json` | `figs/fig13_判定误差棒.png`、`figs/fig14_时长收敛.png` |
+
+运行顺序：`robust.py` → `figrobust.py`。`robust.py` 只依赖标准库，`results/stats.json` 已随包提供（由 `extract.py` 生成）；若只想复核数字，直接看 `results/robust_输出.txt` 与 `results/robust.json` 即可。
