@@ -19,9 +19,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from sim import EDGES, grade, load_index, simulate  # noqa: E402
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-PKG = os.path.dirname(HERE) if os.path.basename(HERE) == "code" else os.path.join(HERE, "deliver")
-RES = os.path.join(HERE, "build") if os.path.isdir(os.path.join(HERE, "build")) else os.path.join(PKG, "results")
+BASE = os.path.dirname(os.path.abspath(__file__))
 
 
 def agree_rate(states, vals, fs, limit):
@@ -81,7 +79,7 @@ def main():
         print("SP 阈值 %d dB → 触发帧 %3d，涉及 %2d/15 段" % (thr, hits, segs))
 
     json.dump({"grid": grid, "pareto": front, "sp": sp},
-              open(os.path.join(RES, "sim2.json"), "w", encoding="utf-8"),
+              open(os.path.join(BASE, "build", "sim2.json"), "w", encoding="utf-8"),
               ensure_ascii=False)
     print("\nsaved sim2.json")
 

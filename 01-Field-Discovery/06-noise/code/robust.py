@@ -149,7 +149,7 @@ def main():
     print("独立分量下翻转率 > 10%% 的段：%d / %d" % (n, len(rows)))
     for r in rows:
         if r["flip"] > 0.10:
-            print("  擦线：%s %s%s  Δ%+.1f  ±%.1f dB  翻转率 %.0f%%" % (
+            print("  擦线：%s %s%s  Δ%+.1f  ±%.1f dB  翻转率 %.1f%%" % (
                 r["sid"], r["per"], r["loc"], r["delta"], r["half_indep"], r["flip"] * 100))
 
     print()

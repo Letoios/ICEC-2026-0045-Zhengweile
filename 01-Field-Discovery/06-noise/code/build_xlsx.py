@@ -14,11 +14,8 @@ from openpyxl.chart.label import DataLabelList
 from openpyxl.formatting.rule import ColorScaleRule, CellIsRule
 from openpyxl.worksheet.datavalidation import DataValidation
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-PKG = os.path.dirname(HERE) if os.path.basename(HERE) == "code" else os.path.join(HERE, "deliver")
-RES = os.path.join(HERE, "build") if os.path.isdir(os.path.join(HERE, "build")) else os.path.join(PKG, "results")
-BUILD = RES
-DELIVER = PKG
+BUILD = r"D:\deepseek工作\noise06\build"
+DELIVER = r"D:\deepseek工作\noise06\deliver"
 OUT = os.path.join(DELIVER, "数据", "课题06_十五组声学数据表与雷达图.xlsx")
 
 NAVY = "1F3864"
@@ -61,8 +58,8 @@ def main():
     ws.sheet_view.showGridLines = False
 
     HDR = ["编号", "时段", "标准\n归属", "监测点位", "功能区\n类别", "适用限值\n(昼间) dB(A)",
-           "采样日期", "开始时刻", "时长\n(s)", "有效\n样本", "均值 Leq\ndB(A)",
-           "瞬时峰值\nLmax dB(A)", "1 s 峰值\ndB(A)", "L10", "L50", "L90", "超出量\nΔdB", "判定",
+           "采样日期", "开始时刻", "时长\n(s)", "有效\n样本", "均值 Leq\n(未计权 dB)",
+           "瞬时峰值\nLmax (未计权)", "1 s 峰值\n(未计权 dB)", "L10", "L50", "L90", "超出量\nΔdB", "判定",
            "夜间限值\n(情景) dB(A)", "情景 Δ\n(若按夜间)"]
     W = [6, 6, 15, 13, 9, 13, 12, 10, 7, 7, 11, 16, 12, 8, 8, 8, 9, 8, 13, 12]
 
@@ -70,7 +67,7 @@ def main():
     ws.merge_cells("A2:T2")
     ws["A2"].value = ("数据来源：Phyphox「声音振幅」原始包（采样率约 9.2 Hz）　｜　判定依据：GB 3096-2008《声环境质量标准》"
                       "　｜　昼间 6:00—22:00、夜间 22:00—6:00；15 组实测时刻全部落在昼间区间，故判定一律用昼间限值，夜间限值仅作情景推演（最后两列）"
-                      "　｜　15 组 · 5 点位 × 3 时段"+"\n"+""+"　｜　传感器：手机麦克风（OnePlus PLK110，Phyphox 1.2.1），未接标准声级计，绝对声级存在未量化偏差")
+                      "　｜　15 组 · 5 点位 × 3 时段"+"\n"+""+"　｜　传感器：手机麦克风（OnePlus PLK110，Phyphox 1.2.1）。该实验为未计权宽带 RMS + 经验偏移，不做 A 计权与频响补偿，绝对声级未经标准声级计校准；判定用 Δ（相对限值），跨点位只在同机同管线内可比")
     ws["A2"].font = Font(name="微软雅黑", size=9, color="666666")
     ws["A2"].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
     ws.row_dimensions[2].height = 40
@@ -339,7 +336,7 @@ def main():
         ("S2 轻度超标", "0 < Δ ≤ +5", "黄", "FACC15", "75%", "呼吸 0.5 Hz", "50%", "刚过线，提示注意"),
         ("S3 中度超标", "+5 < Δ ≤ +10", "橙", "FB923C", "90%", "闪烁 1.0 Hz", "50%", "明显超标，需要干预"),
         ("S4 重度超标", "Δ > +10", "红", "EF4444", "100%", "急闪 2.5 Hz", "30%", "严重超标，立即处置"),
-        ("SP 瞬时冲击", "Lmax ≥ 85 dB(A)", "红白交替", "EF4444", "100%", "快闪 5.0 Hz", "50%", "脉冲式冲击，与等级判定并行"),
+        ("SP 瞬时冲击", "Lmax ≥ 85 dB（未计权）", "红白交替", "EF4444", "100%", "快闪 5.0 Hz", "50%", "脉冲式冲击，与等级判定并行"),
     ]
     for k, rowv in enumerate(LIGHT):
         row = 4 + k
@@ -364,7 +361,7 @@ def main():
         ("最短保持", "任一超标状态 ≥ 10 s", "兜底：实测很少触发，见回放仿真说明"),
         ("优先级", "SP > S4 > S3 > S2 > S1 > S0", "高优先级可立即抢占，低优先级不得覆盖高优先级"),
         ("夜间模式", "22:00—6:00 亮度 ×0.4、频率上限 1 Hz", "避免「治理噪声」反而制造光污染"),
-        ("冲击通道", "Lmax ≥ 85 dB(A) 立即触发，3 s 后回退", "不参与平滑、不排队去抖"),
+        ("冲击通道", "Lmax ≥ 85 dB（未计权）立即触发，3 s 后回退", "不参与平滑、不排队去抖"),
         ("不确定度带", "±3 dB（见《创新体系》第 2 节）", "落入灰带时由 S1/S2 之间取「黄闪」并标记待复核"),
     ]
     ws5.merge_cells(start_row=r, start_column=1, end_row=r, end_column=8)

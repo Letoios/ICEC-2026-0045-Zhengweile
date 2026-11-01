@@ -8,13 +8,9 @@ import os
 import json
 from PIL import Image, ImageDraw, ImageFont
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-PKG = os.path.dirname(HERE) if os.path.basename(HERE) == "code" else os.path.join(HERE, "deliver")
-RES = os.path.join(HERE, "build") if os.path.isdir(os.path.join(HERE, "build")) else os.path.join(PKG, "results")
-MAP = os.path.join(PKG, "data", "campus_map.jpg")
-if not os.path.exists(MAP):
-    MAP = os.path.join(RES, "campus_map.jpg")
-OUT = os.path.join(PKG, "figs", "fig7_噪声地图.png")
+BASE = os.path.dirname(os.path.abspath(__file__))
+MAP = os.path.join(BASE, "build", "campus_map.jpg")
+OUT = os.path.join(BASE, "deliver", "figs", "fig7_噪声地图.png")
 
 FONTS = r"C:\Windows\Fonts"
 
@@ -52,7 +48,7 @@ def dcolor(v, lo=-13.0, hi=7.0):
 
 
 def main():
-    st = json.load(open(os.path.join(RES, "stats.json"), encoding="utf-8"))
+    st = json.load(open(os.path.join(BASE, "build", "stats.json"), encoding="utf-8"))
     rows = {}
     for r in st:
         rows.setdefault(r["loc"], {})[r["per"]] = r

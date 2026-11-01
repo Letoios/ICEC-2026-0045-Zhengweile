@@ -9,10 +9,8 @@ import os
 
 from PIL import Image, ImageDraw, ImageFont
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-PKG = os.path.dirname(HERE) if os.path.basename(HERE) == "code" else os.path.join(HERE, "deliver")
-RES = os.path.join(HERE, "build") if os.path.isdir(os.path.join(HERE, "build")) else os.path.join(PKG, "results")
-OUT = os.path.join(PKG, "figs")
+BASE = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.join(BASE, "deliver", "figs")
 FONT = r"C:\Windows\Fonts\msyh.ttc"
 FONTB = r"C:\Windows\Fonts\msyhbd.ttc"
 
@@ -24,8 +22,8 @@ def F(n, bold=False):
 
 
 def main():
-    s3 = json.load(open(os.path.join(RES, "sim3.json"), encoding="utf-8"))
-    s4 = json.load(open(os.path.join(RES, "sim4.json"), encoding="utf-8"))
+    s3 = json.load(open(os.path.join(BASE, "build", "sim3.json"), encoding="utf-8"))
+    s4 = json.load(open(os.path.join(BASE, "build", "sim4.json"), encoding="utf-8"))
 
     def pick(rows, variant, confirm):
         for r in rows:

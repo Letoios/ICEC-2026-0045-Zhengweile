@@ -12,9 +12,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from sim import grade, load_index  # noqa: E402
 from sim3 import frames_of, run, score, smooth  # noqa: E402
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-PKG = os.path.dirname(HERE) if os.path.basename(HERE) == "code" else os.path.join(HERE, "deliver")
-RES = os.path.join(HERE, "build") if os.path.isdir(os.path.join(HERE, "build")) else os.path.join(PKG, "results")
+BASE = os.path.dirname(os.path.abspath(__file__))
 
 
 def main():
@@ -46,7 +44,7 @@ def main():
             print("保持 %.0fs 最短驻留 %2.0fs → 切换 %3d | 一致1s %5.1f%% | "
                   "一致3s %5.1f%% | 差一档内 %5.1f%%"
                   % (hold, dwell, sw_tot, rec["agree1"], rec["agree3"], rec["within1"]))
-    json.dump(rows, open(os.path.join(RES, "sim4.json"), "w",
+    json.dump(rows, open(os.path.join(BASE, "build", "sim4.json"), "w",
                          encoding="utf-8"), ensure_ascii=False, indent=1)
     print("\nsaved sim4.json")
 

@@ -26,9 +26,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from sim import EDGES, grade, load_index  # noqa: E402
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-PKG = os.path.dirname(HERE) if os.path.basename(HERE) == "code" else os.path.join(HERE, "deliver")
-RES = os.path.join(HERE, "build") if os.path.isdir(os.path.join(HERE, "build")) else os.path.join(PKG, "results")
+BASE = os.path.dirname(os.path.abspath(__file__))
 
 
 def frames_of(vals, fs):
@@ -127,7 +125,7 @@ def main():
                      rows[-1]["agree3"], rows[-1]["within1"]))
         print("")
 
-    json.dump(rows, open(os.path.join(RES, "sim3.json"), "w",
+    json.dump(rows, open(os.path.join(BASE, "build", "sim3.json"), "w",
                          encoding="utf-8"), ensure_ascii=False, indent=1)
     best = max(rows, key=lambda r: r["agree3"])
     print("best by agree3:", best)

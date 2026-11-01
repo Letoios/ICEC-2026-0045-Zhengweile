@@ -11,11 +11,9 @@ import math
 import os
 from PIL import Image, ImageDraw, ImageFont
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-PKG = os.path.dirname(HERE) if os.path.basename(HERE) == "code" else os.path.join(HERE, "deliver")
-RES = os.path.join(HERE, "build") if os.path.isdir(os.path.join(HERE, "build")) else os.path.join(PKG, "results")
-BUILD = RES
-OUT = os.path.join(PKG, "figs")
+BASE = os.path.dirname(os.path.abspath(__file__))
+BUILD = os.path.join(BASE, "build")
+OUT = os.path.join(BASE, "deliver", "figs")
 FONT = r"C:\Windows\Fonts\msyh.ttc"
 FONTB = r"C:\Windows\Fonts\msyhbd.ttc"
 
@@ -272,7 +270,7 @@ def fig11():
     print("saved", p, img.size)
 
 
-SIM2 = json.load(open(os.path.join(RES, "sim2.json"), encoding="utf-8"))
+SIM2 = json.load(open(os.path.join(BASE, "build", "sim2.json"), encoding="utf-8"))
 
 if __name__ == "__main__":
     fig8()

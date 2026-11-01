@@ -3,13 +3,11 @@
 import json
 import os
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-PKG = os.path.dirname(HERE) if os.path.basename(HERE) == "code" else os.path.join(HERE, "deliver")
-RES = os.path.join(HERE, "build") if os.path.isdir(os.path.join(HERE, "build")) else os.path.join(PKG, "results")
-RUNS = os.path.join(RES, "sim_runs.json")
-SIM2 = os.path.join(RES, "sim2.json")
-EV = os.path.join(RES, "events.json")
-OUT = os.path.join(PKG, "docs", "回放仿真说明.md")
+BASE = os.path.dirname(os.path.abspath(__file__))
+RUNS = os.path.join(BASE, "build", "sim_runs.json")
+SIM2 = os.path.join(BASE, "build", "sim2.json")
+EV = os.path.join(BASE, "build", "events.json")
+OUT = os.path.join(BASE, "deliver", "docs", "回放仿真说明.md")
 
 CN = ["S0 安静", "S1 达标", "S2 轻度超标", "S3 中度超标", "S4 重度超标"]
 EDGES = [(-1e9, -10.0), (-10.0, 0.0), (0.0, 5.0), (5.0, 10.0), (10.0, 1e9)]
@@ -206,22 +204,16 @@ S06 就是典型：106 秒里 95 秒都在 57–59 dB（Δ 只有 +2~+4），中
 
 ## 六、复现方式
 
-在本包的 `code/` 目录下依次执行，无需改任何路径，输出写回本包：
-
 ```
-python sim.py        # 状态机回放 → results/sim_runs.json、results/sim_sweep.json
-python events.py     # 事件归因   → results/events.json
-python sim2.py       # 一致率与帕累托、阈值敏感性 → results/sim2.json
-python sim3.py       # 三处改动的消融 → results/sim3.json
-python sim4.py       # 保持时长 × 最短驻留扫描 → results/sim4.json
+cd D:\\deepseek工作\\noise06
+python sim.py        # 状态机回放 → build/sim_runs.json、build/sim_sweep.json
+python events.py     # 事件归因   → build/events.json
+python sim2.py       # 一致率与帕累托、阈值敏感性 → build/sim2.json
 python figsim.py     # 画 fig8 / fig9 / fig10 / fig11
-python figacc.py     # 画 fig12
 python gen_simdoc.py # 重新生成本文件（所有数字由数据算出）
 ```
 
-以上脚本只依赖标准库 + Pillow，输入只读本包 `data/`，中间结果落在 `results/`。
-已在包内实测：重跑后 `figs/` 下 14 张图与本包自带版本逐字节一致（SHA256 相同），
-说明这批图确实是这串脚本从 `data/` 算出来的。
+五个脚本只依赖标准库 + Pillow，输入只读本包 `data/`。
 
 ## 七、局限（必读）
 

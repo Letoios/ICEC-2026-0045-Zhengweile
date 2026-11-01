@@ -12,11 +12,9 @@ import json
 import math
 import os
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-PKG = os.path.dirname(HERE) if os.path.basename(HERE) == "code" else os.path.join(HERE, "deliver")
-RES = os.path.join(HERE, "build") if os.path.isdir(os.path.join(HERE, "build")) else os.path.join(PKG, "results")
-STATS = os.path.join(RES, "stats.json")
-DATA = os.path.join(PKG, "data")
+BASE = os.path.dirname(os.path.abspath(__file__))
+STATS = os.path.join(BASE, "build", "stats.json")
+DATA = os.path.join(BASE, "deliver", "data")
 
 CONFIRM_S = 3.0
 RELEASE_DB = 1.0
@@ -141,9 +139,9 @@ def main():
             sweep.append({"confirm": confirm, "release": rel, "switches": tot})
             print("confirm %.0fs  release %.0fdB  → 总切换 %3d" % (confirm, rel, tot))
 
-    json.dump(runs, open(os.path.join(RES, "sim_runs.json"), "w",
+    json.dump(runs, open(os.path.join(BASE, "build", "sim_runs.json"), "w",
                          encoding="utf-8"), ensure_ascii=False)
-    json.dump(sweep, open(os.path.join(RES, "sim_sweep.json"), "w",
+    json.dump(sweep, open(os.path.join(BASE, "build", "sim_sweep.json"), "w",
                           encoding="utf-8"), ensure_ascii=False)
     print("\nsaved sim_runs.json / sim_sweep.json")
 

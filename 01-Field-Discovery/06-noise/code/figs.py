@@ -8,11 +8,8 @@ import os, json, math, glob, zipfile, csv
 
 from PIL import Image, ImageDraw, ImageFont
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-PKG = os.path.dirname(HERE) if os.path.basename(HERE) == "code" else os.path.join(HERE, "deliver")
-RES = os.path.join(HERE, "build") if os.path.isdir(os.path.join(HERE, "build")) else os.path.join(PKG, "results")
-BUILD = RES
-OUT = os.path.join(PKG, "figs")
+BUILD = r"D:\deepseek工作\noise06\build"
+OUT = r"D:\deepseek工作\noise06\deliver\figs"
 os.makedirs(OUT, exist_ok=True)
 
 NAVY = "#1F3864"
