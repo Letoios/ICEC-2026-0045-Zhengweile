@@ -23,10 +23,15 @@ T_STILL_AC  = 0.35   # 无量纲：自相关。能量低但周期性明显 → �
 T_RUN_RMS   = 10.0   # 绝对量：竖直 RMS
 T_RUN_CAD   = 2.0    # 无量纲：步频 (Hz)
 T_RUN_MIN   = 6.0    # 绝对量：步频高但幅度不够，不算跑步（快节奏下楼会到 2.3 Hz）
+T_DOWN_RMS  = 1.5    # m/s²：下台阶要求的最小幅度
 T_INFO      = 1.0    # 绝对量：RMS × 自相关，低于此值说明这一段没有步态信息
+T_INFO_RMS  = 0.8    # 绝对量：只有能量也很低才算「没信息」；正常人上楼 RMS≈2.8 不该被拒
 T_DIFF      = 0.035  # 无量纲：正峰% − 负谷%
 T_SKEW      = 0.25   # 无量纲：偏度
-T_AC        = 0.70   # 无量纲：自相关强度
+T_AC        = 0.70   # 无量纲：仅作参考，不再单独用于判定
+T_SKEW_W    = 0.20   # 无量纲：偏度正部的权重。走路脚跟着地有正向尖峰，上楼没有
+T_WALK      = 0.631  # 无量纲：ac + diff + 0.2·max(0,skew) 的走路阈值
+                    # 26 段实测：走路最低 0.666 / 上楼最高 0.596，取中点
 
 
 def movavg(x, k):
@@ -94,23 +99,30 @@ def classify(f):
         return "静止", "RMS %.2f < %.1f 且 自相关 %.2f < %.2f" % (
             f["rms"], T_STILL, f["ac"], T_STILL_AC)
     # ② 信息量门槛：能量与周期性的乘积太低 → 这段里没有步态信息，拒绝判定
-    if f["rms"] * f["ac"] < T_INFO:
-        return "无法判定", "RMS×自相关 %.2f < %.1f（信号里没有步态信息）" % (
-            f["rms"] * f["ac"], T_INFO)
+    # ② 不再拒答：宁可给一个可能错的答案，也不输出「不知道」（课题要求可执行的判定）
+    if f["rms"] < T_INFO_RMS and f["rms"] * f["ac"] < T_INFO:
+        # 能量低到连步态都谈不上，但仍要给出最接近的一类
+        return "平地走", "能量极低（RMS %.2f、RMS×自相关 %.2f），按「静默移动」归入平地走" % (
+            f["rms"], f["rms"] * f["ac"])
     # ③ 跑步：步频高且幅度也大，或幅度极大
     if (f["cad"] > T_RUN_CAD and f["rms"] > T_RUN_MIN) or f["rms"] > T_RUN_RMS:
         return "跑步", "步频 %.2f Hz 且 RMS %.2f（或 RMS %.2f > %.1f）" % (
             f["cad"], f["rms"], f["rms"], T_RUN_RMS)
     # ④ 下台阶：触地尖峰型 —— 正向时间占比高且分布右偏
-    if f["diff"] > T_DIFF and f["skew"] > T_SKEW:
-        return "下台阶", "正−负 %+.3f > %.3f 且 偏度 %+.2f > %.2f" % (
-            f["diff"], T_DIFF, f["skew"], T_SKEW)
-    # ⑤ 平地走：波形最规整，周期性最强
-    if f["ac"] > T_AC:
-        return "平地走", "自相关 %.2f > %.2f" % (f["ac"], T_AC)
-    # ⑥ 其余：上台阶（蹬起缓、波形对称、周期性弱）
-    return "上台阶", "以上均不满足（正−负 %+.3f，偏度 %+.2f，自相关 %.2f）" % (
-        f["diff"], f["skew"], f["ac"])
+    #    另加 RMS ≥ T_DOWN_RMS：极慢走手提时 diff/skew 会偶然同时越界，靠能量挡回去
+    if f["diff"] > T_DIFF and f["skew"] > T_SKEW and f["rms"] >= T_DOWN_RMS:
+        return "下台阶", "正−负 %+.3f > %.3f 且 偏度 %+.2f > %.2f 且 RMS %.2f ≥ %.1f" % (
+            f["diff"], T_DIFF, f["skew"], T_SKEW, f["rms"], T_DOWN_RMS)
+    # ⑤ 平地走 vs 上台阶：单看自相关会跨人失败（它测持机摆动习惯），
+    #    改成 ac + diff + 0.2·skew⁺ 联合分。上楼的正负差常年偏低、且没有触地尖峰（偏度不右偏），
+    #    三样叠起来才把两类拉开；只用前两样时空隙只有 0.010，加第三样后是 0.070
+    score = f["ac"] + f["diff"] + T_SKEW_W * max(0.0, f["skew"])
+    if score >= T_WALK:
+        return "平地走", "ac+diff+0.2·skew⁺ = %.3f ≥ %.3f（自相关 %.2f，正−负 %+.3f，偏度 %+.2f）" % (
+            score, T_WALK, f["ac"], f["diff"], f["skew"])
+    # ⑥ 上台阶
+    return "上台阶", "ac+diff+0.2·skew⁺ = %.3f < %.3f（自相关 %.2f，正−负 %+.3f，偏度 %+.2f）" % (
+        score, T_WALK, f["ac"], f["diff"], f["skew"])
 
 
 def run_one(folder):
