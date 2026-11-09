@@ -1,0 +1,786 @@
+[
+ {
+  "group": "C1",
+  "idx": 1,
+  "orig": "1档开始",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_01.mp3",
+  "dur": 12.34,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 2,
+  "orig": "标准录音 3",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_02.mp3",
+  "dur": 11.35,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 3,
+  "orig": "标准录音 4",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_03.mp3",
+  "dur": 11.62,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 4,
+  "orig": "标准录音 5",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_04.mp3",
+  "dur": 10.03,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 5,
+  "orig": "标准录音 6",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_05.mp3",
+  "dur": 11.95,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 6,
+  "orig": "标准录音 7",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_06.mp3",
+  "dur": 11.83,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 7,
+  "orig": "标准录音 8",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_07.mp3",
+  "dur": 11.74,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 8,
+  "orig": "标准录音 9",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_08.mp3",
+  "dur": 12.98,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 9,
+  "orig": "标准录音 10",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_09.mp3",
+  "dur": 11.54,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 10,
+  "orig": "标准录音 11",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_10.mp3",
+  "dur": 12.38,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 11,
+  "orig": "标准录音 12",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_11.mp3",
+  "dur": 11.5,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 12,
+  "orig": "1档尾",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_12.mp3",
+  "dur": 17.3,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 1,
+  "orig": "3档头",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_01.mp3",
+  "dur": 11.86,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 2,
+  "orig": "标准录音 14",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_02.mp3",
+  "dur": 16.18,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 3,
+  "orig": "标准录音 15",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_03.mp3",
+  "dur": 11.35,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 4,
+  "orig": "标准录音 16",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_04.mp3",
+  "dur": 12.31,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 5,
+  "orig": "标准录音 17",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_05.mp3",
+  "dur": 12.02,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 6,
+  "orig": "标准录音 18",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_06.mp3",
+  "dur": 11.95,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 7,
+  "orig": "标准录音 19",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_07.mp3",
+  "dur": 20.98,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 8,
+  "orig": "标准录音 20",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_08.mp3",
+  "dur": 11.38,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 9,
+  "orig": "标准录音 21",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_09.mp3",
+  "dur": 10.66,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 10,
+  "orig": "3档末尾",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_10.mp3",
+  "dur": 10.94,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 1,
+  "orig": "标准录音 24",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_01.mp3",
+  "dur": 11.66,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 2,
+  "orig": "标准录音 25",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_02.mp3",
+  "dur": 12.38,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 3,
+  "orig": "标准录音 26",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_03.mp3",
+  "dur": 11.62,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 4,
+  "orig": "标准录音 27",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_04.mp3",
+  "dur": 11.26,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 5,
+  "orig": "标准录音 28",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_05.mp3",
+  "dur": 11.59,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 6,
+  "orig": "标准录音 29",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_06.mp3",
+  "dur": 11.18,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 7,
+  "orig": "标准录音 30",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_07.mp3",
+  "dur": 11.06,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 8,
+  "orig": "标准录音 31",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_08.mp3",
+  "dur": 11.62,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 9,
+  "orig": "标准录音 32",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_09.mp3",
+  "dur": 11.35,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 10,
+  "orig": "标准录音 33",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_10.mp3",
+  "dur": 18.82,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 11,
+  "orig": "标准录音 34",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_11.mp3",
+  "dur": 11.18,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 12,
+  "orig": "标准录音 35",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_12.mp3",
+  "dur": 11.38,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 13,
+  "orig": "5档末",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_13.mp3",
+  "dur": 11.38,
+  "sr": 48000
+ },
+ {
+  "group": "C4",
+  "idx": 1,
+  "orig": "5档胶带始",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C4_01.mp3",
+  "dur": 10.63,
+  "sr": 48000
+ },
+ {
+  "group": "C4",
+  "idx": 2,
+  "orig": "标准录音 37",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C4_02.mp3",
+  "dur": 11.02,
+  "sr": 48000
+ },
+ {
+  "group": "C4",
+  "idx": 3,
+  "orig": "标准录音 38",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C4_03.mp3",
+  "dur": 11.42,
+  "sr": 48000
+ },
+ {
+  "group": "C4",
+  "idx": 4,
+  "orig": "标准录音 39",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C4_04.mp3",
+  "dur": 10.9,
+  "sr": 48000
+ },
+ {
+  "group": "C4",
+  "idx": 5,
+  "orig": "标准录音 40",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C4_05.mp3",
+  "dur": 11.42,
+  "sr": 48000
+ },
+ {
+  "group": "C4",
+  "idx": 6,
+  "orig": "标准录音 41",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C4_06.mp3",
+  "dur": 25.9,
+  "sr": 48000
+ },
+ {
+  "group": "C4",
+  "idx": 7,
+  "orig": "标准录音 42",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C4_07.mp3",
+  "dur": 10.54,
+  "sr": 48000
+ },
+ {
+  "group": "C4",
+  "idx": 8,
+  "orig": "标准录音 43",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C4_08.mp3",
+  "dur": 11.23,
+  "sr": 48000
+ },
+ {
+  "group": "C4",
+  "idx": 9,
+  "orig": "标准录音 44",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C4_09.mp3",
+  "dur": 10.9,
+  "sr": 48000
+ },
+ {
+  "group": "C4",
+  "idx": 10,
+  "orig": "标准录音 45",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C4_10.mp3",
+  "dur": 11.18,
+  "sr": 48000
+ },
+ {
+  "group": "C4",
+  "idx": 11,
+  "orig": "标准录音 46",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C4_11.mp3",
+  "dur": 10.7,
+  "sr": 48000
+ },
+ {
+  "group": "C4",
+  "idx": 12,
+  "orig": "标准录音 47",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C4_12.mp3",
+  "dur": 11.38,
+  "sr": 48000
+ },
+ {
+  "group": "C4",
+  "idx": 13,
+  "orig": "标准录音 48",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C4_13.mp3",
+  "dur": 11.02,
+  "sr": 48000
+ },
+ {
+  "group": "C4",
+  "idx": 14,
+  "orig": "标准录音 49",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C4_14.mp3",
+  "dur": 11.35,
+  "sr": 48000
+ },
+ {
+  "group": "C4",
+  "idx": 15,
+  "orig": "标准录音 50",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C4_15.mp3",
+  "dur": 11.02,
+  "sr": 48000
+ },
+ {
+  "group": "C4",
+  "idx": 16,
+  "orig": "5档胶带末",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C4_16.mp3",
+  "dur": 11.42,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 1,
+  "orig": "半遮挡头",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_01.mp3",
+  "dur": 11.42,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 2,
+  "orig": "标准录音 52",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_02.mp3",
+  "dur": 10.54,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 3,
+  "orig": "标准录音 53",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_03.mp3",
+  "dur": 10.58,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 4,
+  "orig": "标准录音 54",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_04.mp3",
+  "dur": 10.78,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 5,
+  "orig": "标准录音 55",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_05.mp3",
+  "dur": 11.59,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 6,
+  "orig": "标准录音 56",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_06.mp3",
+  "dur": 10.58,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 7,
+  "orig": "标准录音 57",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_07.mp3",
+  "dur": 10.99,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 8,
+  "orig": "标准录音 58",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_08.mp3",
+  "dur": 12.19,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 9,
+  "orig": "标准录音 59",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_09.mp3",
+  "dur": 11.18,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 10,
+  "orig": "标准录音 60",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_10.mp3",
+  "dur": 10.46,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 11,
+  "orig": "标准录音 61",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_11.mp3",
+  "dur": 23.11,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 12,
+  "orig": "标准录音 62",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_12.mp3",
+  "dur": 11.3,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 13,
+  "orig": "标准录音 63",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_13.mp3",
+  "dur": 11.42,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 14,
+  "orig": "标准录音 64",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_14.mp3",
+  "dur": 12.31,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 15,
+  "orig": "标准录音 65",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_15.mp3",
+  "dur": 10.63,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 16,
+  "orig": "标准录音 66",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_16.mp3",
+  "dur": 11.02,
+  "sr": 48000
+ },
+ {
+  "group": "C5",
+  "idx": 17,
+  "orig": "半遮挡尾",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C5_17.mp3",
+  "dur": 10.99,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 13,
+  "orig": "1档头位",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_13.mp3",
+  "dur": 11.38,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 14,
+  "orig": "标准录音 68",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_14.mp3",
+  "dur": 11.18,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 15,
+  "orig": "标准录音 69",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_15.mp3",
+  "dur": 10.63,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 16,
+  "orig": "标准录音 70",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_16.mp3",
+  "dur": 11.14,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 17,
+  "orig": "标准录音 71",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_17.mp3",
+  "dur": 11.35,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 18,
+  "orig": "标准录音 72",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_18.mp3",
+  "dur": 10.63,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 19,
+  "orig": "标准录音 73",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_19.mp3",
+  "dur": 10.82,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 20,
+  "orig": "标准录音 74",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_20.mp3",
+  "dur": 10.54,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 21,
+  "orig": "标准录音 75",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_21.wav",
+  "dur": 11.24,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 22,
+  "orig": "1档末尾",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_22.wav",
+  "dur": 10.72,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 11,
+  "orig": "3档头",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_11.mp3",
+  "dur": 11.86,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 12,
+  "orig": "标准录音 77",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_12.wav",
+  "dur": 11.48,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 13,
+  "orig": "标准录音 78",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_13.wav",
+  "dur": 11.2,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 14,
+  "orig": "标准录音 79",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_14.wav",
+  "dur": 11.44,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 15,
+  "orig": "标准录音 80",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_15.wav",
+  "dur": 10.72,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 16,
+  "orig": "标准录音 81",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_16.wav",
+  "dur": 11.36,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 17,
+  "orig": "标准录音 82",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_17.wav",
+  "dur": 25.72,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 18,
+  "orig": "3档的尾",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_18.wav",
+  "dur": 10.44,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 14,
+  "orig": "5档头",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_14.wav",
+  "dur": 11.36,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 15,
+  "orig": "标准录音 84",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_15.wav",
+  "dur": 13.48,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 16,
+  "orig": "标准录音 85",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_16.wav",
+  "dur": 11.4,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 17,
+  "orig": "标准录音 86",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_17.wav",
+  "dur": 11.32,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 18,
+  "orig": "标准录音 87",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_18.wav",
+  "dur": 11.44,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 19,
+  "orig": "标准录音 88",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_19.wav",
+  "dur": 12.48,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 20,
+  "orig": "标准录音 89",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_20.wav",
+  "dur": 26.88,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 22,
+  "orig": "5档尾1",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_22.wav",
+  "dur": 11.36,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 21,
+  "orig": "标准录音90",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_21.wav",
+  "dur": 11.36,
+  "sr": 48000
+ },
+ {
+  "group": "C3",
+  "idx": 23,
+  "orig": "5.wav",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C3_23.wav",
+  "dur": 10.88,
+  "sr": 48000
+ },
+ {
+  "group": "C2",
+  "idx": 19,
+  "orig": "3.wav",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C2_19.wav",
+  "dur": 10.68,
+  "sr": 48000
+ },
+ {
+  "group": "C1",
+  "idx": 23,
+  "orig": "1.wav",
+  "path": "D:\\deepseek工作\\proj03\\data\\raw\\C1_23.wav",
+  "dur": 10.6,
+  "sr": 48000
+ }
+]

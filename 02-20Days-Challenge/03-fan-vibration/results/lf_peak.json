@@ -1,0 +1,572 @@
+{
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_01.mp3": {
+  "group": "C1",
+  "name": "C1_01.mp3",
+  "f_peak": 54.19921875,
+  "amp": 0.0035517340872946584
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_02.mp3": {
+  "group": "C1",
+  "name": "C1_02.mp3",
+  "f_peak": 71.044921875,
+  "amp": 0.005049320621319625
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_03.mp3": {
+  "group": "C1",
+  "name": "C1_03.mp3",
+  "f_peak": 79.833984375,
+  "amp": 0.002414795096509136
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_04.mp3": {
+  "group": "C1",
+  "name": "C1_04.mp3",
+  "f_peak": 76.904296875,
+  "amp": 0.003104039944147575
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_05.mp3": {
+  "group": "C1",
+  "name": "C1_05.mp3",
+  "f_peak": 81.298828125,
+  "amp": 0.00791443845741117
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_06.mp3": {
+  "group": "C1",
+  "name": "C1_06.mp3",
+  "f_peak": 51.26953125,
+  "amp": 0.0034969610520175437
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_07.mp3": {
+  "group": "C1",
+  "name": "C1_07.mp3",
+  "f_peak": 87.890625,
+  "amp": 0.001473297600411766
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_08.mp3": {
+  "group": "C1",
+  "name": "C1_08.mp3",
+  "f_peak": 82.763671875,
+  "amp": 0.0036313392992760843
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_09.mp3": {
+  "group": "C1",
+  "name": "C1_09.mp3",
+  "f_peak": 76.904296875,
+  "amp": 0.004833299430163523
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_10.mp3": {
+  "group": "C1",
+  "name": "C1_10.mp3",
+  "f_peak": 73.974609375,
+  "amp": 0.00104676424448016
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_11.mp3": {
+  "group": "C1",
+  "name": "C1_11.mp3",
+  "f_peak": 61.5234375,
+  "amp": 0.0059063941397442974
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_12.mp3": {
+  "group": "C1",
+  "name": "C1_12.mp3",
+  "f_peak": 59.326171875,
+  "amp": 0.0031065451858759744
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_01.mp3": {
+  "group": "C2",
+  "name": "C2_01.mp3",
+  "f_peak": 72.509765625,
+  "amp": 0.011316787367218554
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_02.mp3": {
+  "group": "C2",
+  "name": "C2_02.mp3",
+  "f_peak": 69.580078125,
+  "amp": 0.010458732975705912
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_03.mp3": {
+  "group": "C2",
+  "name": "C2_03.mp3",
+  "f_peak": 72.509765625,
+  "amp": 0.011325784703547085
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_04.mp3": {
+  "group": "C2",
+  "name": "C2_04.mp3",
+  "f_peak": 79.833984375,
+  "amp": 0.010132230877408306
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_05.mp3": {
+  "group": "C2",
+  "name": "C2_05.mp3",
+  "f_peak": 79.1015625,
+  "amp": 0.010952522367077078
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_06.mp3": {
+  "group": "C2",
+  "name": "C2_06.mp3",
+  "f_peak": 83.49609375,
+  "amp": 0.012845506693510901
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_07.mp3": {
+  "group": "C2",
+  "name": "C2_07.mp3",
+  "f_peak": 93.75,
+  "amp": 0.01159143737989575
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_08.mp3": {
+  "group": "C2",
+  "name": "C2_08.mp3",
+  "f_peak": 88.623046875,
+  "amp": 0.011439565891381656
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_09.mp3": {
+  "group": "C2",
+  "name": "C2_09.mp3",
+  "f_peak": 57.12890625,
+  "amp": 0.00553313425775892
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_10.mp3": {
+  "group": "C2",
+  "name": "C2_10.mp3",
+  "f_peak": 68.84765625,
+  "amp": 0.004444665730739101
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_01.mp3": {
+  "group": "C3",
+  "name": "C3_01.mp3",
+  "f_peak": 82.763671875,
+  "amp": 0.009215678388970099
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_02.mp3": {
+  "group": "C3",
+  "name": "C3_02.mp3",
+  "f_peak": 93.017578125,
+  "amp": 0.008449337785987512
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_03.mp3": {
+  "group": "C3",
+  "name": "C3_03.mp3",
+  "f_peak": 77.63671875,
+  "amp": 0.011730218293573765
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_04.mp3": {
+  "group": "C3",
+  "name": "C3_04.mp3",
+  "f_peak": 85.693359375,
+  "amp": 0.013021839181647054
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_05.mp3": {
+  "group": "C3",
+  "name": "C3_05.mp3",
+  "f_peak": 102.5390625,
+  "amp": 0.010655205997910012
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_06.mp3": {
+  "group": "C3",
+  "name": "C3_06.mp3",
+  "f_peak": 210.205078125,
+  "amp": 0.012894885492510829
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_07.mp3": {
+  "group": "C3",
+  "name": "C3_07.mp3",
+  "f_peak": 87.158203125,
+  "amp": 0.008319416861410828
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_08.mp3": {
+  "group": "C3",
+  "name": "C3_08.mp3",
+  "f_peak": 82.03125,
+  "amp": 0.007487133606429984
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_09.mp3": {
+  "group": "C3",
+  "name": "C3_09.mp3",
+  "f_peak": 67.3828125,
+  "amp": 0.008344213269296095
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_10.mp3": {
+  "group": "C3",
+  "name": "C3_10.mp3",
+  "f_peak": 82.03125,
+  "amp": 0.010729436543687076
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_11.mp3": {
+  "group": "C3",
+  "name": "C3_11.mp3",
+  "f_peak": 82.763671875,
+  "amp": 0.010625710627192675
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_12.mp3": {
+  "group": "C3",
+  "name": "C3_12.mp3",
+  "f_peak": 95.21484375,
+  "amp": 0.01136375544362332
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_13.mp3": {
+  "group": "C3",
+  "name": "C3_13.mp3",
+  "f_peak": 102.5390625,
+  "amp": 0.01259404227897271
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C4_01.mp3": {
+  "group": "C4",
+  "name": "C4_01.mp3",
+  "f_peak": 75.439453125,
+  "amp": 0.012922645835189555
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C4_02.mp3": {
+  "group": "C4",
+  "name": "C4_02.mp3",
+  "f_peak": 65.185546875,
+  "amp": 0.012861017728002048
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C4_03.mp3": {
+  "group": "C4",
+  "name": "C4_03.mp3",
+  "f_peak": 215.33203125,
+  "amp": 0.011222623215201488
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C4_04.mp3": {
+  "group": "C4",
+  "name": "C4_04.mp3",
+  "f_peak": 71.77734375,
+  "amp": 0.013545057541455772
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C4_05.mp3": {
+  "group": "C4",
+  "name": "C4_05.mp3",
+  "f_peak": 80.56640625,
+  "amp": 0.012902713913775324
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C4_06.mp3": {
+  "group": "C4",
+  "name": "C4_06.mp3",
+  "f_peak": 75.439453125,
+  "amp": 0.012073609482610768
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C4_07.mp3": {
+  "group": "C4",
+  "name": "C4_07.mp3",
+  "f_peak": 63.720703125,
+  "amp": 0.011956595751781807
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C4_08.mp3": {
+  "group": "C4",
+  "name": "C4_08.mp3",
+  "f_peak": 123.046875,
+  "amp": 0.02080027134822129
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C4_09.mp3": {
+  "group": "C4",
+  "name": "C4_09.mp3",
+  "f_peak": 88.623046875,
+  "amp": 0.006388799649958308
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C4_10.mp3": {
+  "group": "C4",
+  "name": "C4_10.mp3",
+  "f_peak": 103.271484375,
+  "amp": 0.01426556382593211
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C4_11.mp3": {
+  "group": "C4",
+  "name": "C4_11.mp3",
+  "f_peak": 56.396484375,
+  "amp": 0.010273211491400746
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C4_12.mp3": {
+  "group": "C4",
+  "name": "C4_12.mp3",
+  "f_peak": 96.6796875,
+  "amp": 0.007054610017786916
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C4_13.mp3": {
+  "group": "C4",
+  "name": "C4_13.mp3",
+  "f_peak": 135.498046875,
+  "amp": 0.01560349866933238
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C4_14.mp3": {
+  "group": "C4",
+  "name": "C4_14.mp3",
+  "f_peak": 68.115234375,
+  "amp": 0.008987473882765249
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C4_15.mp3": {
+  "group": "C4",
+  "name": "C4_15.mp3",
+  "f_peak": 92.28515625,
+  "amp": 0.010634967573599175
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C4_16.mp3": {
+  "group": "C4",
+  "name": "C4_16.mp3",
+  "f_peak": 94.482421875,
+  "amp": 0.003669897018057353
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_01.mp3": {
+  "group": "C5",
+  "name": "C5_01.mp3",
+  "f_peak": 184.5703125,
+  "amp": 0.012318367223522253
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_02.mp3": {
+  "group": "C5",
+  "name": "C5_02.mp3",
+  "f_peak": 183.837890625,
+  "amp": 0.013116805234630166
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_03.mp3": {
+  "group": "C5",
+  "name": "C5_03.mp3",
+  "f_peak": 183.837890625,
+  "amp": 0.01141761332223515
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_04.mp3": {
+  "group": "C5",
+  "name": "C5_04.mp3",
+  "f_peak": 183.10546875,
+  "amp": 0.009555451734123269
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_05.mp3": {
+  "group": "C5",
+  "name": "C5_05.mp3",
+  "f_peak": 91.552734375,
+  "amp": 0.020689677873685662
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_06.mp3": {
+  "group": "C5",
+  "name": "C5_06.mp3",
+  "f_peak": 183.10546875,
+  "amp": 0.007481718522690666
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_07.mp3": {
+  "group": "C5",
+  "name": "C5_07.mp3",
+  "f_peak": 91.552734375,
+  "amp": 0.005838407452599992
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_08.mp3": {
+  "group": "C5",
+  "name": "C5_08.mp3",
+  "f_peak": 91.552734375,
+  "amp": 0.007181183956739579
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_09.mp3": {
+  "group": "C5",
+  "name": "C5_09.mp3",
+  "f_peak": 183.10546875,
+  "amp": 0.008773018800165839
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_10.mp3": {
+  "group": "C5",
+  "name": "C5_10.mp3",
+  "f_peak": 183.10546875,
+  "amp": 0.008045053990408583
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_11.mp3": {
+  "group": "C5",
+  "name": "C5_11.mp3",
+  "f_peak": 91.552734375,
+  "amp": 0.008576957170188967
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_12.mp3": {
+  "group": "C5",
+  "name": "C5_12.mp3",
+  "f_peak": 182.373046875,
+  "amp": 0.006628419324397165
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_13.mp3": {
+  "group": "C5",
+  "name": "C5_13.mp3",
+  "f_peak": 182.373046875,
+  "amp": 0.007068609366497113
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_14.mp3": {
+  "group": "C5",
+  "name": "C5_14.mp3",
+  "f_peak": 183.10546875,
+  "amp": 0.0072826093927689795
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_15.mp3": {
+  "group": "C5",
+  "name": "C5_15.mp3",
+  "f_peak": 182.373046875,
+  "amp": 0.007183593340692006
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_16.mp3": {
+  "group": "C5",
+  "name": "C5_16.mp3",
+  "f_peak": 91.552734375,
+  "amp": 0.0072205035051817286
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C5_17.mp3": {
+  "group": "C5",
+  "name": "C5_17.mp3",
+  "f_peak": 91.552734375,
+  "amp": 0.006876781854823758
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_13.mp3": {
+  "group": "C1",
+  "name": "C1_13.mp3",
+  "f_peak": 65.185546875,
+  "amp": 0.005042413943504158
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_14.mp3": {
+  "group": "C1",
+  "name": "C1_14.mp3",
+  "f_peak": 63.720703125,
+  "amp": 0.0046627219391551355
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_15.mp3": {
+  "group": "C1",
+  "name": "C1_15.mp3",
+  "f_peak": 57.861328125,
+  "amp": 0.0052330516183519814
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_16.mp3": {
+  "group": "C1",
+  "name": "C1_16.mp3",
+  "f_peak": 81.298828125,
+  "amp": 0.005383940157346731
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_17.mp3": {
+  "group": "C1",
+  "name": "C1_17.mp3",
+  "f_peak": 78.369140625,
+  "amp": 0.005144940063517497
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_18.mp3": {
+  "group": "C1",
+  "name": "C1_18.mp3",
+  "f_peak": 68.115234375,
+  "amp": 0.009953531716404933
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_19.mp3": {
+  "group": "C1",
+  "name": "C1_19.mp3",
+  "f_peak": 66.650390625,
+  "amp": 0.0095162770015003
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_20.mp3": {
+  "group": "C1",
+  "name": "C1_20.mp3",
+  "f_peak": 76.904296875,
+  "amp": 0.0022027160768847568
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_21.wav": {
+  "group": "C1",
+  "name": "C1_21.wav",
+  "f_peak": 62.255859375,
+  "amp": 0.004884519413003195
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C1_22.wav": {
+  "group": "C1",
+  "name": "C1_22.wav",
+  "f_peak": 73.2421875,
+  "amp": 0.0065019852029006096
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_11.mp3": {
+  "group": "C2",
+  "name": "C2_11.mp3",
+  "f_peak": 72.509765625,
+  "amp": 0.011316787367218554
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_12.wav": {
+  "group": "C2",
+  "name": "C2_12.wav",
+  "f_peak": 76.904296875,
+  "amp": 0.009455994776193381
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_13.wav": {
+  "group": "C2",
+  "name": "C2_13.wav",
+  "f_peak": 108.3984375,
+  "amp": 0.012791136950653498
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_14.wav": {
+  "group": "C2",
+  "name": "C2_14.wav",
+  "f_peak": 61.5234375,
+  "amp": 0.012471753261643506
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_15.wav": {
+  "group": "C2",
+  "name": "C2_15.wav",
+  "f_peak": 186.767578125,
+  "amp": 0.007678545284139634
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_16.wav": {
+  "group": "C2",
+  "name": "C2_16.wav",
+  "f_peak": 107.666015625,
+  "amp": 0.005903558006012638
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_17.wav": {
+  "group": "C2",
+  "name": "C2_17.wav",
+  "f_peak": 86.42578125,
+  "amp": 0.011903845017676154
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C2_18.wav": {
+  "group": "C2",
+  "name": "C2_18.wav",
+  "f_peak": 122.314453125,
+  "amp": 0.012281350887390822
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_14.wav": {
+  "group": "C3",
+  "name": "C3_14.wav",
+  "f_peak": 54.19921875,
+  "amp": 0.015427095752622183
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_15.wav": {
+  "group": "C3",
+  "name": "C3_15.wav",
+  "f_peak": 35.888671875,
+  "amp": 0.015815549693618196
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_16.wav": {
+  "group": "C3",
+  "name": "C3_16.wav",
+  "f_peak": 51.26953125,
+  "amp": 0.017403113639056854
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_17.wav": {
+  "group": "C3",
+  "name": "C3_17.wav",
+  "f_peak": 104.736328125,
+  "amp": 0.019137422521603553
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_18.wav": {
+  "group": "C3",
+  "name": "C3_18.wav",
+  "f_peak": 67.3828125,
+  "amp": 0.015380592369611768
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_19.wav": {
+  "group": "C3",
+  "name": "C3_19.wav",
+  "f_peak": 78.369140625,
+  "amp": 0.008689596973220247
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_20.wav": {
+  "group": "C3",
+  "name": "C3_20.wav",
+  "f_peak": 84.9609375,
+  "amp": 0.015847856238711957
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_22.wav": {
+  "group": "C3",
+  "name": "C3_22.wav",
+  "f_peak": 68.115234375,
+  "amp": 0.013266498993506437
+ },
+ "D:\\deepseek工作\\proj03\\data\\raw\\C3_21.wav": {
+  "group": "C3",
+  "name": "C3_21.wav",
+  "f_peak": 107.666015625,
+  "amp": 0.017534253223606588
+ }
+}
