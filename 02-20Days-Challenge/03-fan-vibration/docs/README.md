@@ -29,7 +29,7 @@
 | ② 时域/频域特征提取代码（20 分） | `code/features.py`、`code/featurize.py` | ✅ |
 | ③ 盲测准确率视频与抗噪报告（20 分） | `docs/盲测方案.md`、`docs/盲测视频说明.md`、`docs/抗噪报告.md`、`figs/fig06_抗噪曲线.png` | ✅（视频待拍） |
 
-补充材料：`docs/档位与工况说明.md`（**五个工况逐个说明 + 归类规则**）、`docs/方法说明.md`（方法与归因）、`docs/数据采集说明.md`（工况定义与录制条件）、`docs/弱项清单与整改.md`（自我审查）、`figs/fig01–fig07`、`process_logs/`（7 篇按日过程日志，含踩坑与绕行）、`iterations/`（3 篇版本迭代，含失败方案留档）。
+补充材料：`docs/档位与工况说明.md`（**五个工况逐个说明 + 归类规则**）、`docs/方法说明.md`（方法与归因）、`docs/数据采集说明.md`（工况定义与录制条件）、`docs/弱项清单与整改.md`（自我审查）、**`docs/创新点.md`（四件作业没要求但做了的事）**、`figs/fig01–fig09`、`process_logs/`（7 篇按日过程日志，含踩坑与绕行）、`iterations/`（3 篇版本迭代，含失败方案留档）。
 
 ---
 
@@ -135,7 +135,7 @@ proj03/
 │  ├─ clf_report.json 两套口径的混淆矩阵与准确率
 │  ├─ antinoise.json  抗噪曲线数据
 │  └─ file_map.json   文件 → 工况映射
-├─ figs/              fig01–fig07
+├─ figs/              fig01–fig09
 └─ docs/              README（本文件）、方法说明、抗噪报告、盲测方案、盲测视频拍摄手册、数据采集说明、采集作业书、弱项清单与整改
 ```
 
