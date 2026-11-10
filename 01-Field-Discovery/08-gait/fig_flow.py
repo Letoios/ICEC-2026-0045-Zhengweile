@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw, ImageFont
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "figs", "fig3_判定流程.png")
 
-W, H = 1020, 1000
+W, H = 1020, 1102
 NAVY = "#1F3864"
 GREY = "#6B7280"
 LINE = "#9AA7B8"
@@ -21,10 +21,12 @@ EDGE = "#C9D4E3"
 # (条件文本, 命中label, label颜色)
 STEPS = [
     ("① 竖直 RMS < 1.5  且  自相关 < 0.35", "静止", "#8C8C8C"),
-    ("② RMS × 自相关 < 1.0（没有步态信息）", "无法判定", "#7A6FB0"),
+    ("② RMS < 0.8 且 RMS×自相关 < 1.0（能量极低）", "平地走", "#22A75A"),
     ("③ 步频 > 2.0 且 RMS > 6.0，或 RMS > 10", "跑步", "#C00000"),
-    ("④ 正−负 > +0.035  且  偏度 > +0.25", "下台阶", "#ED7D31"),
-    ("⑤ 自相关 > 0.70", "平地走", "#22A75A"),
+    ("④ 正−负 > +0.035  且  偏度 > +0.25", "下台阶（尖峰型）", "#ED7D31"),
+    ("④b RMS ≥ 6.0 且 1.5 ≤ 步频 < 1.9 且 每步冲量 < 5.0", "下台阶（快下楼型）", "#ED7D31"),
+    ("④c RMS ≥ 6.0（走路实测最高只有 4.67）", "上台阶（高幅型）", "#2E75B6"),
+    ("⑤ 自相关 + 正负差 + 0.2×(偏度正部) ≥ 0.631", "平地走", "#22A75A"),
 ]
 
 
@@ -53,10 +55,10 @@ def main():
     f_lab = font(17, True)
     f_small = font(13)
 
-    d.text((46, 30), "课题 08　六步判定流程（自上而下，先答「是」者直接出结果）", font=f_title, fill=NAVY)
+    d.text((46, 30), "课题 08　判定流程（自上而下，先答「是」者直接出结果；④ 分两支、另有 ④c）", font=f_title, fill=NAVY)
 
-    bx, bw, bh = 100, 470, 78
-    ys = [96, 228, 360, 492, 624]
+    bx, bw, bh = 100, 470, 66
+    ys = [86, 186, 286, 386, 486, 586, 686]
     lx, lw, lh = 630, 250, 56
 
     for i, (cond, label, color) in enumerate(STEPS):
@@ -82,9 +84,12 @@ def main():
     d.rounded_rectangle([bx, ty, bx + bw, ty + bh], radius=12, fill="#2E75B6")
     d.text((bx + bw / 2, ty + bh / 2), "⑥ 上台阶（兜底）", font=f_lab, fill="white", anchor="mm")
 
-    note = ("注：① 是绝对量级 + 周期性守卫（防止轻手轻脚上楼被当成静止），② 是信息量门槛（信号里没有步态就拒答），\n"
-            "③④ 是波形形状量；阈值在 8 段实测数据上标定，各条边界余量见《阈值规则.md》第五节。")
-    d.text((46, ty + bh + 46), note, font=f_small, fill=GREY)
+    note = ("注：① 绝对量级 + 周期性守卫（防止轻手轻脚上楼被当成静止）；② 能量兜底，不拒答，一律归入平地走；\n"
+            "③ 步频与幅度同时成立；④ 靠触地冲击的波形形状；\n"
+            "④b 是「下得太快、冲击被腿缓冲掉」时的兜底：退回幅度，再用每步冲量把「用力上楼」摘出去；\n"
+            "④c 是反向兜底：走路 RMS 实测最高只有 4.67，能到 6 以上的一定是上楼；\n"
+            "⑤ 三样联合分，一条斜线把走路和上楼分开。阈值在 37 段实测数据上标定，余量见《阈值规则.md》第五节。")
+    d.text((46, ty + bh + 34), note, font=f_small, fill=GREY)
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     im.save(OUT)

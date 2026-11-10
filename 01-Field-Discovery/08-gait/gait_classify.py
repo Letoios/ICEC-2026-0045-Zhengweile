@@ -31,6 +31,20 @@ T_SKEW      = 0.25   # 无量纲：偏度
 T_AC        = 0.70   # 无量纲：仅作参考，不再单独用于判定
 T_SKEW_W    = 0.20   # 无量纲：偏度正部的权重。走路脚跟着地有正向尖峰，上楼没有
 T_WALK      = 0.631  # 无量纲：ac + diff + 0.2·max(0,skew) 的走路阈值
+
+# 快下楼专用（④b）：速度一快，触地冲击被腿部缓冲吃掉，diff / skew 这两样「形状」判据会失效，
+# 只能退回「幅度」——快下楼每步身体下落速度大、落地减速更猛，竖直 RMS 显著高于上楼。
+# 实测（34 段）：快下楼 6.43 / 6.98；上楼最高 5.58（快上楼，距门槛只差 0.42）；
+# 慢下楼 4.46–5.81；跑步 13.9 以上已被 ③ 截走。
+T_FAST_DOWN_RMS = 6.0  # m/s^2
+T_FAST_DOWN_CAD = 1.9
+T_FAST_DOWN_IMP = 5.0      # 每步冲量 rms/cad 的上界：用力上楼实测 6.17，快下楼 3.66~4.29
+T_FAST_DOWN_CAD_MIN = 1.5  # 步频下界，排除极慢的走
+
+# ④c 高幅必上楼：走路实测竖向 RMS 最高 4.67（本人快走 4.01 / 手提快走 3.57），
+# 能到 6 以上而没被 ④/④b 拿走，只可能是在上楼梯（用力上楼 9.08 / 9.64）。
+T_HIGH_RMS = 6.0
+  # Hz：快下楼步频仍在 1.6–1.8，不会到跑步那档
                     # 26 段实测：走路最低 0.666 / 上楼最高 0.596，取中点
 
 
@@ -111,8 +125,18 @@ def classify(f):
     # ④ 下台阶：触地尖峰型 —— 正向时间占比高且分布右偏
     #    另加 RMS ≥ T_DOWN_RMS：极慢走手提时 diff/skew 会偶然同时越界，靠能量挡回去
     if f["diff"] > T_DIFF and f["skew"] > T_SKEW and f["rms"] >= T_DOWN_RMS:
-        return "下台阶", "正−负 %+.3f > %.3f 且 偏度 %+.2f > %.2f 且 RMS %.2f ≥ %.1f" % (
+        return "下台阶", "触地尖峰型：正−负 %+.3f > %.3f 且 偏度 %+.2f > %.2f 且 RMS %.2f ≥ %.1f" % (
             f["diff"], T_DIFF, f["skew"], T_SKEW, f["rms"], T_DOWN_RMS)
+    # ④b 快下楼：形状判据失效时的幅度兜底（见 T_FAST_DOWN_RMS 注释）
+    if (f["rms"] >= T_FAST_DOWN_RMS and f["cad"] < T_FAST_DOWN_CAD
+            and f["cad"] >= T_FAST_DOWN_CAD_MIN
+            and (f["rms"] / f["cad"] if f["cad"] else 0) < T_FAST_DOWN_IMP):
+        return "下台阶", "快下楼型：形状判据失效，但 RMS %.2f ≥ %.1f、步频 %.2f 在 %.1f~%.1f Hz、每步冲量 %.2f < %.1f" % (f["rms"], T_FAST_DOWN_RMS, f["cad"], T_FAST_DOWN_CAD_MIN, T_FAST_DOWN_CAD,
+               f["rms"] / f["cad"] if f["cad"] else 0, T_FAST_DOWN_IMP)
+    # ④c 高幅必上楼：走路不可能有这么高的竖向加速度
+    if f["rms"] >= T_HIGH_RMS:
+        return "上台阶", "高幅型：RMS %.2f ≥ %.1f（走路实测最高 4.67），且形状不像下楼" % (
+            f["rms"], T_HIGH_RMS)
     # ⑤ 平地走 vs 上台阶：单看自相关会跨人失败（它测持机摆动习惯），
     #    改成 ac + diff + 0.2·skew⁺ 联合分。上楼的正负差常年偏低、且没有触地尖峰（偏度不右偏），
     #    三样叠起来才把两类拉开；只用前两样时空隙只有 0.010，加第三样后是 0.070
