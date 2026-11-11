@@ -1,0 +1,28 @@
+{
+ "layer1_has_fault": {
+  "ok": 89,
+  "tot": 98,
+  "pct": 90.8
+ },
+ "direct_5class": {
+  "ok": 60,
+  "tot": 98,
+  "pct": 61.2
+ },
+ "direct_3class": {
+  "ok": 89,
+  "tot": 98,
+  "pct": 90.8
+ },
+ "layer2_which_fault": {
+  "ok": 33,
+  "tot": 33,
+  "pct": 100.0
+ },
+ "layer3_which_gear": {
+  "ok": 28,
+  "tot": 65,
+  "pct": 43.1
+ },
+ "n_total": 98
+}

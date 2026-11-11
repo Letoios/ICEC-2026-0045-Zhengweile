@@ -1,0 +1,12 @@
+{
+ "nested_5class": {
+  "ok": 60,
+  "tot": 98,
+  "pct": 61.2
+ },
+ "nested_3class": {
+  "ok": 85,
+  "tot": 98,
+  "pct": 86.7
+ }
+}
