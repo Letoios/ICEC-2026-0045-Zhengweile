@@ -8,6 +8,7 @@ pts = [(float(r["cad"]), float(r["impulse"]), r["truth"], r["file"].split("/")[-
 up = [p for p in pts if p[2] == "上台阶"]
 dn = [p for p in pts if p[2] == "下台阶"]
 
+N = len(pts)
 W, H = 1160, 760
 img = Image.new("RGB", (W, H), "white"); d = ImageDraw.Draw(img)
 d.text((44, 20), "课题 08　一次被新样本打破的规则：④b 为什么要再加「每步冲量」", font=F_(21, True), fill="#1F3864")
@@ -50,7 +51,7 @@ lines = [
  ("→ 用力上楼 6.17/6.49 不再触发，", "#166534"),
  ("   快下楼 3.66 / 4.29 仍触发。", "#166534"),
  ("", "#000000"),
- ("共 43 段全部判对（43/43）。", "#7C3AED"),
+ ("共 %d 段全部判对（%d/%d）。" % (N, N, N), "#7C3AED"),
 ]
 for k, (t, c) in enumerate(lines):
     d.text((826, 190 + k * 26), t, font=F_(13, k in (0, 4, 8)), fill=c)

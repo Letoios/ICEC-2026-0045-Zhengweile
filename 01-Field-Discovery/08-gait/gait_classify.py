@@ -178,7 +178,13 @@ def main():
         print(__doc__)
         sys.exit(1)
     target = sys.argv[1]
-    if os.path.exists(os.path.join(target, "Accelerometer.csv")):
+    if target == "--all":
+        # 递归扫包内 data/，跳过 trans_ 开头的过渡段（单标签对它无意义）
+        base = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+        folders = sorted(os.path.dirname(p) for p in
+                         glob.glob(os.path.join(base, "**", "Accelerometer.csv"), recursive=True))
+        folders = [d for d in folders if not os.path.basename(d).startswith("trans_")]
+    elif os.path.exists(os.path.join(target, "Accelerometer.csv")):
         folders = [target]
     else:
         folders = sorted(d for d in glob.glob(os.path.join(target, "*"))
@@ -199,6 +205,29 @@ def main():
     if len(rows) > 1:
         print("─" * 80)
         print(pd.DataFrame(rows).to_string(index=False))
+
+    if "--check" in sys.argv:
+        import csv as _csv
+        base = os.path.dirname(os.path.abspath(__file__))
+        with open(os.path.join(base, "features_all.csv"), encoding="utf-8-sig") as _f:
+            tab = list(_csv.DictReader(_f))
+        truth = {r["file"].split("/")[-1]: r["truth"] for r in tab}
+        ok = bad = 0
+        misses = []
+        for d in folders:
+            name = os.path.basename(d.rstrip("\\/"))
+            label, _ = classify(run_one(d)[0])
+            if name in truth:
+                if label == truth[name]:
+                    ok += 1
+                else:
+                    bad += 1
+                    misses.append((name, truth[name], label))
+        print("─" * 80)
+        print("对数：共 %d 段，判对 %d，判错 %d" % (ok + bad, ok, bad))
+        for n, t, l in misses:
+            print("  判错：%s  真值 %s → 判成 %s" % (n, t, l))
+
 
 
 if __name__ == "__main__":

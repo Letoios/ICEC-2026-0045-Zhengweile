@@ -15,7 +15,15 @@
 | `process_logs/` | 按日期的过程记录（9 份），记录当时为什么这么采、遇到什么问题、结论后来为什么改 |
 | `raw_output/extract_15组.txt` | 15 组指标重算的纯文本输出，可与 Excel 逐行对照 |
 
-原始数据副本不在本包内，在上一层的 `../data/` 里：每组一个目录，含 `Amplitudes.csv`（Phyphox 原始约 9.2 Hz 序列）+ `meta.txt`（设备、时间、偏移、SHA256、指标）。
+原始文件不在本包内，在上一层的 `../data/` 里。每组一个目录 `Sxx_时段_点位/`，含三样：
+
+| 位置 | 内容 |
+|---|---|
+| `Amplitudes.csv` | Phyphox 原始约 9.2 Hz 序列，**UTF-8 BOM 版**（为 Excel 直开另存，比原始多 3 字节 BOM，数据一致） |
+| `meta.txt` | 设备、起止时间、校准偏移、原始文件 SHA256、重算指标 |
+| `原始/` | **采集现场原样**：14 个组是 Phyphox zip（内含 `meta/time.csv`、`meta/device.csv`、`Calibration.csv`）；S11 是未打包的导出文件夹；另有 3 张现场图与 1 个双源 `Transfer Dock_Text_*.txt` |
+
+**哈希能不能对上，一条命令就知道**：`cd ../code && python verify_raw.py`，期望最后一行是「共 15 组，核验一致 15 组，不一致 0 组」。
 
 ---
 

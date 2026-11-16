@@ -27,7 +27,8 @@
 │   ├── 稳健性分析.md             误差棒、擦线判定、整体偏移敏感性、采样要多长
 │   ├── 不确定度预算.md           GUM 合成：绝对 ±14 dB、段内相对 ±4 dB，校准敏感性 2→13 组
 │   └── 准确率提升记录.md         71.0% → 74.4% 的三步：换基准 / 对称回差 / 保持瘦身
-├── data/                        15 组原始序列副本（Amplitudes.csv + meta.txt），可独立重算
+├── data/                        15 组 × (Amplitudes.csv + meta.txt + 原始/)；`原始/` 放 Phyphox zip、
+│                                Calibration.csv 所在包、3 张现场图、双源 txt —— 证据包里说的东西都在这里
 ├── photos/                      15 张现场照（每组 1 张，自带时间水印，与采集时刻互校）
 ├── code/                        全部生成脚本 + 一个只读本包的独立复核脚本
 ├── results/                     中间结果（robust.json / gum.json / stats.json / meta.json）
