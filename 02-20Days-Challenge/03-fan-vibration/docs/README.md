@@ -4,6 +4,30 @@
 
 ---
 
+## 数据里有一段是重复的（自己先说）
+
+`data/raw/C2_01.mp3` 与 `data/raw/C2_11.mp3` **MD5 完全相同**，wav 同样（`C2_01.wav` == `C2_11.wav`）——
+导出时同一段录音被存了两个编号，所以：
+
+- 「98 段」严格说是 **97 段不同录音**（C2 组 19 段里有 1 段是重的）；
+- 两段的特征值一模一样（f0 38.82、centroid 702.8、dur 11.86），所以不影响标签，只让 C2 组多算了一次。
+
+**影响多大**：按同一口径（6 特征 + 分组交叉验证 + kNN k=3）去掉重复段重算，
+三类 90.8% → **90.7%**、五类 60.2% → **58.8%**（本复算口径）。**差异在 1.5 个点以内，不改变任何结论**，
+所以对外仍报 98 段的数，但把这件事写在这里，而不是等人拿 hash 工具比出来。
+
+其余重复只有 `meta/device.csv`（Phyphox 每次导出都带一份相同的设备信息，3051 字节）——
+那是导出格式的产物，不是数据问题。
+
+## 数字口径：两个准确率为什么不一样
+
+`results/` 里有两组数，**61.2% 和 66.3% 都是真的，但只有一个能对外说**：
+
+- `hier.json` → 分组交叉验证（每次留出一整个录制批次）→ 五类 **61.2%**、三类 **90.8%** ← **所有文档引用的是这个**
+- `clf_report.json` → 留一法（每次只留一段）→ 五类 66.3%、三类 90.8% ← 同批次样本互相投票，**偏高，不引用**
+
+详见 `results/README.md`。评委翻 `results/` 会看到两个数，所以先把差异写在门口。
+
 ## 五分钟读法
 
 这个目录有 11 篇文档、11 张图、20 个脚本。**按下面的顺序读，五分钟能拿到结论**：
@@ -56,6 +80,22 @@ python code/vib_all.py        # 振动 5 工况汇总
 补充材料：`docs/档位与工况说明.md`（**五个工况逐个说明 + 归类规则**）、`docs/方法说明.md`（方法与归因）、`docs/数据采集说明.md`（工况定义与录制条件）、`docs/弱项清单与整改.md`（自我审查）、**`docs/创新点.md`（七件作业没要求但做了的事，含一条失败）**、`docs/振动通道.md`（**加速度计那一半，题目写了「声振」而前 10 节只做了声**）、`figs/` 共 11 张（fig01–09、fig11、fig12，**没有 fig10**，原因见下文「关于 figs 编号」）、`process_logs/`（7 篇按日过程日志，含踩坑与绕行）、`iterations/`（3 篇版本迭代，含失败方案留档）。
 
 ---
+
+## 图目录（11 张，每张对应哪一段）
+
+| 文件 | 画的是什么 | 对应文档 |
+|---|---|---|
+| `fig01_测试录音频谱.png` | 一段录音的波形 + 对数频谱，标出基频 f0 与它的谐波族 | `方法说明.md` §2 |
+| `fig02_三档位可分性.png` | 三个档位的平均频谱叠在一起 + 「谱心 vs 高频占比」散点 | `档位与工况说明.md` §2 |
+| `fig03_五工况频谱.png` | 五个工况的平均频谱，看 C4/C5 各自多出了什么 | `档位与工况说明.md` §3 |
+| `fig04_可分性实测.png` | 98 段「低频峰频率 vs 谱心」散点：**档位分不开、故障分得开** | `档位与工况说明.md` §4 |
+| `fig05_混淆矩阵.png` | 分组交叉验证的混淆矩阵（五类 61.2% / 三类 90.8%） | `方法说明.md` §5 |
+| `fig06_抗噪曲线.png` | 往录音里掺白噪，看准确率怎么掉 | `抗噪报告.md` |
+| `fig07_各档位单独看.png` | 每个档位内部的 f0 与 RMS 分布：转速有趋势但互相重叠 | `档位与工况说明.md` §2 |
+| `fig08_开集检测.png` | 没见过的故障，它敢不敢说「不认识」 | `创新点.md` 创新二 |
+| `fig09_频谱瀑布.png` | 同一转速下，贴胶带前后频谱的时间-频率图 | `创新点.md` 创新三 |
+| `fig11_振动通道.png` | 加速度计：水平看转速、垂直看故障 | `振动通道.md` §4 |
+| `fig12_分层判定.png` | 把 61.2% 拆成三个各自能解释的数 | `创新点.md` 创新六 |
 
 ## 关于 figs 编号
 
@@ -131,13 +171,12 @@ python code/vib_all.py        # 振动 5 工况汇总
 ## 怎么跑
 
 ```powershell
-$py = "C:\Users\z\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe"
-cd D:\deepseek工作\proj03\code
+cd <你 clone 下来的仓库>/02-20Days-Challenge/03-fan-vibration/code
 
-& $py featurize.py    # 98 段 -> results/features.csv
-& $py evaluate.py     # 两套口径 × 两种粒度 -> results/clf_report.json
-& $py antinoise2.py   # 抗噪曲线 -> results/antinoise.json（约 6 分钟）
-& $py selftest.py     # 合成信号自检（不依赖真实数据）
+python featurize.py    # 98 段 -> results/features.csv
+python evaluate.py     # 两套口径 × 两种粒度 -> results/clf_report.json
+python antinoise2.py   # 抗噪曲线 -> results/antinoise.json（约 6 分钟）
+python selftest.py     # 合成信号自检（不依赖真实数据）
 ```
 
 依赖：**只用 numpy + Pillow + 标准库**。不用 scipy、librosa、ffmpeg 命令行（mp3 解码见 `code/mp3read.py`，ctypes 直接调系统自带的 `ffmpeg.dll`）。
@@ -169,7 +208,7 @@ proj03/
 │  ├─ clf_report.json 两套口径的混淆矩阵与准确率
 │  ├─ antinoise.json  抗噪曲线数据
 │  └─ file_map.json   文件 → 工况映射
-├─ figs/              fig01–fig12
+├─ figs/              fig01–fig09、fig11、fig12（11 张，无 fig10）
 └─ docs/              README（本文件）、方法说明、抗噪报告、盲测方案、盲测视频拍摄手册、数据采集说明、采集作业书、弱项清单与整改
 ```
 

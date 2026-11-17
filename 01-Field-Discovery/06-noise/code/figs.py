@@ -1,5 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
-"""课题06 全部插图（Pillow 手绘，不依赖 matplotlib）。
+r"""课题06 全部插图（Pillow 手绘，不依赖 matplotlib）。
 
 输入 noise06\build\stats.json + meta.json
 输出 noise06\deliver\figs\*.png

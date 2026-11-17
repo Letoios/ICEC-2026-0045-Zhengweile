@@ -41,15 +41,16 @@
 在 PowerShell 里跑：
 
 ```powershell
-$src = "D:\deepseek工作\gait08_evidence"
-$dst = "D:\ICEC-2026-0045-Zhengweile\01-Field-Discovery\08-gait"
+# 作者本地同步用，评委无需运行：仓库里的 证据包/ 已是最终版
+$src = "<作者本地的 gait08_evidence>"
+$dst = "<仓库根>/01-Field-Discovery/08-gait"
 
 Copy-Item "$src\本人完成说明.md"      $dst -Force
 Copy-Item "$src\ANOMALIES.md"          $dst -Force
 Copy-Item "$src\process_logs"          $dst -Recurse -Force
 Copy-Item "$src\raw_output"            $dst -Recurse -Force
 
-cd "D:\ICEC-2026-0045-Zhengweile"
+cd "<仓库根>"
 git add .
 git commit -m "补充过程证据：本人完成说明、异常登记册、六份运行日志"
 git push

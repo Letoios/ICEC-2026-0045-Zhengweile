@@ -178,6 +178,8 @@ def main():
         print(__doc__)
         sys.exit(1)
     target = sys.argv[1]
+    if target in ("--check", "--all"):
+        target = "--all"
     if target == "--all":
         # 递归扫包内 data/，跳过 trans_ 开头的过渡段（单标签对它无意义）
         base = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")

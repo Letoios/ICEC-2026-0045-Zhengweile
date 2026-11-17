@@ -1,5 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
-"""生成 D:\deepseek工作\入库_项目三.ps1（带 UTF-8 BOM，PowerShell 5.1 才不会乱码）。"""
+r"""生成 D:\deepseek工作\入库_项目三.ps1（带 UTF-8 BOM，PowerShell 5.1 才不会乱码）。"""
 import io, os
 
 PS = r'''# 项目三 入库脚本（阶段二 20 天挑战）
