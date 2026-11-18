@@ -36,6 +36,7 @@
 ## 复现
 
 ```powershell
-python D:\deepseek工作\proj03\code\classify.py    # 生成 clf_report.json（留一法）
-python D:\deepseek工作\proj03\code\hier.py        # 生成 hier.json（分组交叉验证，对外口径）
+cd 02-20Days-Challenge/03-fan-vibration        # 从仓库根目录进到这里
+python code/classify.py    # 生成 results/clf_report.json（留一法，66.3%）
+python code/hier.py        # 生成 results/hier.json（分组交叉验证，对外口径，61.2%）
 ```
