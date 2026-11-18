@@ -17,6 +17,14 @@ import sys, os, glob
 import numpy as np
 import pandas as pd
 
+# ---- 控制台编码兜底：GBK 终端遇到 − × ≥ Δ 时只降级成 ?，不抛 UnicodeEncodeError ----
+try:
+    sys.stdout.reconfigure(errors="replace")
+    sys.stderr.reconfigure(errors="replace")
+except Exception:
+    pass
+
+
 # ---------- 阈值（在 8 段实测数据上标定，见 README 第五节）----------
 T_STILL     = 1.5    # 绝对量：竖直 RMS (m/s^2)。静止时只剩传感器噪声，与人无关
 T_STILL_AC  = 0.35   # 无量纲：自相关。能量低但周期性明显 → 不是静止

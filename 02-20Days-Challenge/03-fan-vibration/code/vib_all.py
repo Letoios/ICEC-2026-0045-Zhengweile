@@ -1,6 +1,15 @@
 ﻿# -*- coding: utf-8 -*-
+import sys
 import os, csv, json
 import numpy as np
+
+# ---- 控制台编码兜底：GBK 终端遇到 − × ≥ Δ 时只降级成 ?，不抛 UnicodeEncodeError ----
+try:
+    sys.stdout.reconfigure(errors="replace")
+    sys.stderr.reconfigure(errors="replace")
+except Exception:
+    pass
+
 ROOT = r"D:\deepseek工作\proj03\data\振动"
 GROUPS = [
     ("C1 一档",   ["1档","1档1","1档2"]),

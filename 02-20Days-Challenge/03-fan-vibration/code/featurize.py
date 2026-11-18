@@ -1,7 +1,16 @@
 ﻿# -*- coding: utf-8 -*-
 """批量提取特征 -> results/features.csv"""
+import sys
 import os, csv, json
 import numpy as np, audio as A
+
+# ---- 控制台编码兜底：GBK 终端遇到 − × ≥ Δ 时只降级成 ?，不抛 UnicodeEncodeError ----
+try:
+    sys.stdout.reconfigure(errors="replace")
+    sys.stderr.reconfigure(errors="replace")
+except Exception:
+    pass
+
 
 def hps_f0(x, sr, lo=12.0, hi=120.0, k=8):
     fr, am = A.spectrum(x, sr, n=65536)

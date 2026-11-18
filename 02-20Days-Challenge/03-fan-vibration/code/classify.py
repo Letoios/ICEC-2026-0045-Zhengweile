@@ -1,7 +1,16 @@
 ﻿# -*- coding: utf-8 -*-
 """留一法分类：五类工况 + 三类故障。输出混淆矩阵与报告。"""
+import sys
 import os, csv, json
 import numpy as np
+
+# ---- 控制台编码兜底：GBK 终端遇到 − × ≥ Δ 时只降级成 ?，不抛 UnicodeEncodeError ----
+try:
+    sys.stdout.reconfigure(errors="replace")
+    sys.stderr.reconfigure(errors="replace")
+except Exception:
+    pass
+
 
 FEAT = ["f0", "centroid", "e_low", "e_mid", "e_high", "h2", "h3", "h4"]
 G5 = ["C1","C2","C3","C4","C5"]

@@ -12,10 +12,19 @@
   ① 绝对判定（Δ = Leq − 限值）的不确定度 → 含校准项，很大
   ② 段内相对量（同一段里两个时刻的比较）的不确定度 → 不含校准项，很小
 """
+import sys
 import io
 import json
 import math
 import os
+
+# ---- 控制台编码兜底：GBK 终端遇到 − × ≥ Δ 时只降级成 ?，不抛 UnicodeEncodeError ----
+try:
+    sys.stdout.reconfigure(errors="replace")
+    sys.stderr.reconfigure(errors="replace")
+except Exception:
+    pass
+
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PKG = os.path.dirname(HERE) if os.path.basename(HERE) == "code" else os.path.join(HERE, "deliver")

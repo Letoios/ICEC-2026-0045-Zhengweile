@@ -1,5 +1,6 @@
 ﻿# -*- coding: utf-8 -*-
 """分层判定（正确版）。"""
+import sys
 import csv
 import numpy as np
 rows=list(csv.DictReader(open(r"D:\deepseek工作\proj03\results\features.csv",encoding="utf-8-sig")))
@@ -48,6 +49,14 @@ for x in d[:5]: print("     错:",x)
 
 # ---- 落盘（供文档复核）----
 import io, json
+
+# ---- 控制台编码兜底：GBK 终端遇到 − × ≥ Δ 时只降级成 ?，不抛 UnicodeEncodeError ----
+try:
+    sys.stdout.reconfigure(errors="replace")
+    sys.stderr.reconfigure(errors="replace")
+except Exception:
+    pass
+
 _res = {}
 _a = np.arange(98)
 o, t, _ = cv(_a, np.where(y5 < 3, 0, 1), 2)
