@@ -10,7 +10,6 @@
 ## 怎么打开
 
 - **在线版** → <https://letoios.github.io/ICEC-2026-0045-Zhengweile/demo/>
-  （需先在 Settings → Pages 把 Source 设成 `main` / `(root)`；未开启时用下面这种方式）
 - **本地版** → 下载本目录的 `index.html`，双击即可。不需要 Python、不需要服务器、不需要装任何东西。
 
 ---
