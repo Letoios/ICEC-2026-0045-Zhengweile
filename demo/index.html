@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>临界现场 · 三个手机传感器课题的可运行判定台</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --ink:#0b1220; --sub:#64748b; --line:#e4e9f0; --bg:#f6f8fb; --card:#fff;
+    --blue:#2563eb; --green:#16a34a; --cyan:#0ea5e9; --yellow:#eab308;
+    --orange:#ea580c; --red:#dc2626; --purple:#7c3aed;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);font-size:15px;line-height:1.68;
+       font-family:-apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;
+       -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:34px 22px 80px}
+
+  header{margin-bottom:8px}
+  .kicker{font-size:12px;letter-spacing:2.4px;color:var(--sub);text-transform:uppercase;margin-bottom:8px}
+  h1{font-size:30px;margin:0 0 8px;letter-spacing:.5px;font-weight:800}
+  h1 span{color:var(--blue)}
+  .thesis{font-size:14.5px;color:#475569;max-width:760px;margin:0}
+  .thesis b{color:var(--ink)}
+
+  .tabs{display:flex;gap:4px;border-bottom:2px solid var(--line);margin:28px 0 24px;flex-wrap:wrap}
+  .tab{padding:11px 18px;cursor:pointer;border:none;background:none;font-size:14.5px;
+       color:var(--sub);border-bottom:2px solid transparent;margin-bottom:-2px;
+       font-family:inherit;transition:color .15s}
+  .tab:hover{color:#334155}
+  .tab.on{color:var(--blue);border-bottom-color:var(--blue);font-weight:700}
+  .tab .n{display:inline-block;width:19px;height:19px;line-height:19px;text-align:center;
+          border-radius:50%;background:#e2e8f0;color:#64748b;font-size:11.5px;
+          margin-right:7px;font-weight:700}
+  .tab.on .n{background:var(--blue);color:#fff}
+
+  .panel{display:none;animation:fade .25s}
+  .panel.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+        padding:20px 22px;margin-bottom:16px}
+  .card h2{font-size:16.5px;margin:0 0 5px;font-weight:700}
+  .card .hint{color:var(--sub);font-size:13.5px;margin:0 0 16px;line-height:1.7}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:840px){.grid2{grid-template-columns:1fr}}
+
+  label.row{display:flex;align-items:center;gap:11px;margin:10px 0;font-size:13.5px}
+  label.row .nm{width:78px;color:var(--sub);flex:none}
+  label.row input[type=range]{flex:1;accent-color:var(--blue);height:4px}
+  label.row .val{width:70px;text-align:right;font-variant-numeric:tabular-nums;
+                 font-weight:700;font-size:13px}
+
+  .btns{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}
+  .btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 13px;
+       font-size:12.5px;cursor:pointer;color:#334155;font-family:inherit;transition:.15s}
+  .btn:hover{border-color:#94a3b8;background:#f8fafc}
+  .btn.on{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
+  .btn.play{background:#0f172a;border-color:#0f172a;color:#fff}
+  .btn.play:hover{background:#1e293b}
+
+  /* 双灯 */
+  .lamps{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .lampbox{border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+  .lampbox .cap{font-size:12px;color:var(--sub);margin-bottom:8px;letter-spacing:.5px}
+  .lampbox .cap b{color:var(--ink);font-size:12.5px}
+  .lamp{height:106px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+        font-size:19px;font-weight:800;letter-spacing:.5px;transition:background .2s,color .2s}
+  .lampsub{font-size:11.5px;color:var(--sub);margin-top:7px;font-variant-numeric:tabular-nums}
+  @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.14}}
+
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:5px 16px;font-size:13px;margin-top:12px}
+  .kv b{color:var(--sub);font-weight:500;white-space:nowrap}
+  .kv span{font-variant-numeric:tabular-nums}
+
+  ul.trace{list-style:none;padding:0;margin:10px 0 0;font-size:13px}
+  ul.trace li{padding:6px 11px;border-radius:7px;margin-bottom:4px;color:#94a3b8;
+              background:#f8fafc;border-left:3px solid #e2e8f0;
+              font-variant-numeric:tabular-nums;transition:.15s}
+  ul.trace li.hit{background:#ecfdf5;color:#065f46;border-left-color:#10b981;font-weight:600}
+  ul.trace li.stop{background:#fef6f6;color:#b91c1c;border-left-color:#fca5a5}
+
+  .verdict{font-size:34px;font-weight:800;margin:2px 0 4px;letter-spacing:1px}
+  .why{color:#475569;font-size:13.5px;min-height:44px}
+
+  /* 刻度尺 */
+  .ruler{margin:18px 0 6px;position:relative;height:86px}
+  .ruler .axis{position:absolute;left:0;right:0;top:44px;height:2px;background:#cbd5e1}
+  .ruler .band{position:absolute;top:28px;height:32px;background:#f1f5f9;
+               border-left:1px solid #cbd5e1;border-right:1px solid #cbd5e1}
+  .ruler .thr{position:absolute;top:14px;height:60px;width:2px;background:var(--red)}
+  .ruler .thr::after{content:attr(data-l);position:absolute;top:-19px;left:50%;
+                     transform:translateX(-50%);font-size:11.5px;color:var(--red);
+                     font-weight:700;white-space:nowrap}
+  .ruler .dot{position:absolute;top:37px;width:14px;height:14px;border-radius:50%;
+              background:var(--blue);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.25);
+              transform:translateX(-50%);transition:left .18s}
+  .ruler .lab{position:absolute;top:62px;font-size:11.5px;color:var(--sub);
+              transform:translateX(-50%);white-space:nowrap}
+
+  .foot{color:#94a3b8;font-size:12.5px;text-align:center;margin-top:38px;line-height:2}
+  code{background:#f1f5f9;padding:1.5px 5px;border-radius:4px;font-size:12.5px}
+  .badge{display:inline-block;font-size:11.5px;padding:2px 9px;border-radius:999px;
+         background:#eff6ff;color:#1d4ed8;margin-left:8px;vertical-align:middle;font-weight:600}
+  .note{font-size:12.5px;color:var(--sub);border-top:1px dashed var(--line);
+        padding-top:13px;margin-top:16px;line-height:1.8}
+  canvas{display:block;width:100%;height:auto;border-radius:8px}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:#475569;margin-top:10px}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:520px}
+  th,td{padding:8px 10px;border-bottom:1px solid #f1f5f9;text-align:left}
+  thead th{background:#f8fafc;font-weight:600;color:#475569;border-bottom:1px solid var(--line)}
+  .scroll{overflow-x:auto}
+  /* 15 组回放 */
+  #replayBar{height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden;margin-top:14px}
+  #replayBar i{display:block;height:100%;width:0;background:var(--blue);transition:width .12s}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">ICEC-2026 · 学号后四位 0045</div>
+    <h1>临界现场<span>　</span></h1>
+    <p class="thesis">
+      三个课题真正的结论，都不在“平均”上，在<b>临界点</b>上：噪声是擦线 0.8 dB 的那三组、
+      步态是余量 0.008 的那一条阈值、风扇是 61.2% 那个永远上不去的天花板。
+      <b>这个页面让你亲手把参数拖到临界点上，看它翻不翻。</b>
+    </p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab on" data-t="p1"><span class="n">1</span>噪声　灯在哪一刻变红</button>
+    <button class="tab" data-t="p2"><span class="n">2</span>步态　一条规则的走查</button>
+    <button class="tab" data-t="p3"><span class="n">3</span>风扇　两个通道各看什么</button>
+  </div>
+
+  <!-- ================= P1 ================= -->
+  <div class="panel on" id="p1">
+    <div class="card">
+      <h2>同一段声音，两把尺子</h2>
+      <p class="hint">
+        左边用昼间限值，右边用夜间限值。声级是同一个数，可灯的判断能差两档 ——
+        这就是课题06 里那个反直觉的发现：<b>夜间“全员超标”不是变吵了，是尺子短了 10 dB</b>。
+      </p>
+
+      <div class="btns" id="siteBtns">
+        <button class="btn on" data-site="55" data-name="图书馆（1 类）">图书馆 · 1 类 · 55</button>
+        <button class="btn" data-site="60" data-name="食堂（2 类）">食堂 · 2 类 · 60</button>
+        <button class="btn" data-site="70" data-name="主干道（4a 类）">主干道 · 4a 类 · 70</button>
+        <button class="btn" data-site="55" data-name="实训室走廊（1 类）">实训室走廊 · 1 类 · 55</button>
+      </div>
+
+      <label class="row">
+        <span class="nm">Leq</span>
+        <input type="range" id="leq" min="45" max="85" step="0.1" value="61.4">
+        <span class="val" id="leqV">61.4</span>
+      </label>
+
+      <div class="lamps" style="margin-top:16px">
+        <div class="lampbox">
+          <div class="cap">昼间限值 <b id="capDay">55</b> dB</div>
+          <div class="lamp" id="lampDay">中度超标</div>
+          <div class="lampsub" id="subDay">Δ +6.4 dB</div>
+        </div>
+        <div class="lampbox">
+          <div class="cap">夜间限值 <b id="capNight">45</b> dB</div>
+          <div class="lamp" id="lampNight">重度超标</div>
+          <div class="lampsub" id="subNight">Δ +16.4 dB</div>
+        </div>
+      </div>
+
+      <p class="note">
+        同一盏灯，跨过 22:00 就换尺子。所以光效逻辑必须<b>自己处理这个跳变</b> ——
+        而不是让使用者以为“突然变吵了”。
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>把实测的 15 组一次性跑一遍<span class="badge">真实数据</span></h2>
+      <p class="hint">
+        不是演示数据，是仓库里那 15 段录音算出来的 Leq 和对应限值。
+        点播放，看灯逐组亮起，最后停在 12 超标 / 3 达标。
+      </p>
+      <button class="btn play" id="btnReplay">▶ 播放 15 组</button>
+      <div id="replayBar"><i></i></div>
+      <div class="kv" style="margin-top:14px">
+        <b>正在回放</b><span id="rpNow">—</span>
+        <b>已判</b><span id="rpCount">0 / 15</span>
+        <b>统计</b><span id="rpStat">超标 0 · 达标 0</span>
+      </div>
+      <div class="scroll" style="margin-top:14px">
+        <table>
+          <thead><tr><th>编号</th><th>点位</th><th>时段</th><th>Leq</th><th>限值</th><th>Δ</th><th>判定</th></tr></thead>
+          <tbody id="rpBody"></tbody>
+        </table>
+      </div>
+      <p class="note">
+        15 组的实测时刻全落在 06:00–22:00 之间，所以判定一律用昼间限值；
+        夜间限值不作为判定口径，只在 Excel 最后两列做情景推演。<b>这是口径选择，不是数据缺失的掩饰。</b>
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= P2 ================= -->
+  <div class="panel" id="p2">
+    <div class="card">
+      <h2>拖动五个特征，看它停在哪一条规则上</h2>
+      <p class="hint">
+        规则是<b>顺序</b>的：从上往下，第一条成立的直接出结果。
+        下面的预设全部取自仓库 <code>features_all.csv</code> 的真实行，不是编的。
+      </p>
+      <div class="btns" id="presets"></div>
+
+      <div class="grid2">
+        <div>
+          <label class="row"><span class="nm">竖直 RMS</span><input type="range" id="f_rms" min="0.3" max="20" step="0.01" value="2.79"><span class="val" id="v_rms">2.79</span></label>
+          <label class="row"><span class="nm">步频 Hz</span><input type="range" id="f_cad" min="1.0" max="2.6" step="0.01" value="1.28"><span class="val" id="v_cad">1.28</span></label>
+          <label class="row"><span class="nm">自相关</span><input type="range" id="f_ac" min="0" max="1" step="0.001" value="0.880"><span class="val" id="v_ac">0.880</span></label>
+          <label class="row"><span class="nm">正−负差</span><input type="range" id="f_diff" min="-0.1" max="0.15" step="0.001" value="-0.039"><span class="val" id="v_diff">-0.039</span></label>
+          <label class="row"><span class="nm">偏度</span><input type="range" id="f_skew" min="-1" max="1.5" step="0.01" value="-0.26"><span class="val" id="v_skew">-0.26</span></label>
+        </div>
+        <div>
+          <div class="verdict" id="p2v">平地走</div>
+          <div class="why" id="p2w"></div>
+          <div class="kv">
+            <b>联合分</b><span id="p2s">—</span>
+            <b>每步冲量</b><span id="p2i">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>它停在第几条</h2>
+      <p class="hint">绿＝成立并直接出结果；红＝不成立，往下走。</p>
+      <ul class="trace" id="rules"></ul>
+    </div>
+
+    <div class="card">
+      <h2>临界点在哪：走路与上楼之间的那条缝<span class="badge">0.074</span></h2>
+      <p class="hint">
+        联合分 = 自相关 + 正负差 + 0.2×偏度正部。
+        46 段实测：<b>上楼最高 0.596，走路最低 0.670</b>，中间这条缝只有 0.074 宽。
+        阈值 0.631 就架在缝里。
+      </p>
+      <div class="ruler" id="ruler">
+        <div class="axis"></div>
+        <div class="band" id="rBand"></div>
+        <div class="thr" id="rThr" data-l="阈值 0.631"></div>
+        <div class="dot" id="rDot"></div>
+        <div class="lab" id="rLab" style="left:50%">—</div>
+      </div>
+      <p class="note" id="rulerNote">
+        只有走到第 ⑤ 条时才有联合分；被 ①–④c 直接接住的样本没有这个数。
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>这条规则最薄的三处</h2>
+      <p class="hint">46 段实测重算出来的余量，不是“比较稳”这种话。</p>
+      <ul class="trace">
+        <li class="stop">最薄　正−负差门槛 0.035，下楼最低 +0.043　余量 <b>0.008</b></li>
+        <li>第二薄　④b 步频下界 1.5，上楼最低 1.47　余量 <b>0.03</b></li>
+        <li>第三薄　走路/上楼联合分 0.631，上楼最高 0.596　余量 <b>0.035</b></li>
+        <li class="hit">整套 46/46 —— 但<b>冻结规则后盲测只有 2/3</b>。46/46 是拟合，2/3 才是泛化</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================= P3 ================= -->
+  <div class="panel" id="p3">
+    <div class="card">
+      <h2>两个数，两条轴，互不干扰</h2>
+      <p class="hint">
+        同一台风扇 15 段录音（5 工况 × 3）。横轴是水平振动，跟着转速走；纵轴是垂直振动，跟着故障走。
+        鼠标移到点上能看到是哪一组。
+      </p>
+      <canvas id="scatter" width="1000" height="480"></canvas>
+      <div class="legend">
+        <span><i style="background:#2563eb"></i>正常（一/三/五档）</span>
+        <span><i style="background:#dc2626"></i>贴胶带（质量失衡）</span>
+        <span><i style="background:#7c3aed"></i>半遮挡（气动异常）</span>
+      </div>
+      <p class="note">
+        横向：0.035 → 0.098，差近 3 倍，三档分得开。
+        纵向：正常三档挤在 0.088–0.094，故障 0.32 / 0.56，一刀切在 0.20 零重叠。
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>为什么五分类永远过不去</h2>
+      <p class="hint">同一个 61.2%，拆成三个问题看，结论完全不同。</p>
+      <ul class="trace">
+        <li class="hit">① 有没有故障　90.8%（89/98）—— 诊断仪的本职</li>
+        <li class="hit">② 是哪一种故障　100.0%（33/33）—— 胶带 vs 遮挡，一次没错</li>
+        <li class="stop">③ 正常里是哪一档　43.1%（28/65）—— 随机是 33%，只比瞎猜好一点</li>
+        <li>物理原因：三档的转速差只有 20%，<b>比录音位置造成的差别还小</b></li>
+      </ul>
+      <p class="note">
+        加特征能把五分类刷到 72.4%，但嵌套验证（每折内部重做特征选择）会把它打回 61.2%。
+        这个负结果写在 <code>docs/创新点.md</code> 创新七里，没有藏。
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>胶带那一段：整个谱塌缩成 1× + 2×</h2>
+      <div class="kv">
+        <b>正常五档</b><span>主峰 229 Hz（基频 31.4 Hz 的 7.3 倍，不是叶片通过 94 Hz）</span>
+        <b>贴 2 g 胶带</b><span>229 Hz <b>归零</b>，能量全塌到 1×（29 Hz）与 2×（58.7 Hz）</span>
+        <b>转速变化</b><span>只掉 7.6%</span>
+        <b>怎么读</b><span>不是“某个峰变高”，是<b>整个频谱重排</b> —— 质量不平衡的指纹</span>
+      </div>
+      <p class="note">
+        这里我犯过一个错：先按 8 片叶片反推 229 Hz，被“3 片”纠正后才发现 229 根本不在谐波族。
+        更正写在 <code>docs/振动通道.md</code> 的「一处我必须更正的地方」。
+      </p>
+    </div>
+  </div>
+
+  <div class="foot">
+    判定阈值直接引自 <code>gait08/deliver/gait_classify.py</code>；数据引自
+    <code>features_all.csv</code>（46 段）与 <code>results/vibration.json</code>（15 段）。<br>
+    本页只做逻辑演示，正式判定以仓库里的脚本为准 · 无外部依赖 · 单文件可离线打开
+  </div>
+</div>
+
+<script>
+/* ================= 标签页 ================= */
+document.querySelectorAll('.tab').forEach(function(b){
+  b.onclick = function(){
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on')});
+    document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');
+    document.getElementById(b.dataset.t).classList.add('on');
+  };
+});
+
+/* ================= P1：双灯 ================= */
+var LV = [
+  {id:'S0', name:'安静',     lo:-999, hi:-10, hex:'#00C2FF', css:'#0ea5e9', lum:'25%',  hz:0,   blink:'常亮'},
+  {id:'S1', name:'达标',     lo:-10,  hi:0,   hex:'#22C55E', css:'#16a34a', lum:'50%',  hz:0,   blink:'常亮'},
+  {id:'S2', name:'轻度超标', lo:0,    hi:5,   hex:'#FACC15', css:'#eab308', lum:'75%',  hz:0.5, blink:'呼吸 0.5 Hz'},
+  {id:'S3', name:'中度超标', lo:5,    hi:10,  hex:'#FB923C', css:'#ea580c', lum:'90%',  hz:1.0, blink:'闪烁 1.0 Hz'},
+  {id:'S4', name:'重度超标', lo:10,   hi:999, hex:'#EF4444', css:'#dc2626', lum:'100%', hz:2.5, blink:'急闪 2.5 Hz'}
+];
+var S = {siteL:55, leq:61.4};
+
+function levelOf(d){
+  if (d <= -10) return LV[0];
+  if (d <= 0)   return LV[1];
+  if (d <= 5)   return LV[2];
+  if (d <= 10)  return LV[3];
+  return LV[4];
+}
+function paint(el, lv){
+  el.textContent = lv.name;
+  el.style.background = lv.css;
+  el.style.color = (lv.id === 'S2') ? '#3f2f00' : '#fff';
+  el.style.animation = 'none';
+  void el.offsetWidth;
+  if (lv.hz > 0) el.style.animation = 'blink ' + (1/lv.hz).toFixed(2) + 's steps(1,end) infinite';
+}
+function render06(){
+  var dD = S.leq - S.siteL;
+  var dN = S.leq - (S.siteL - 10);
+  paint(document.getElementById('lampDay'),   levelOf(dD));
+  paint(document.getElementById('lampNight'), levelOf(dN));
+  document.getElementById('capDay').textContent   = S.siteL;
+  document.getElementById('capNight').textContent = S.siteL - 10;
+  document.getElementById('subDay').textContent   = 'Δ ' + (dD>=0?'+':'') + dD.toFixed(1) + ' dB · ' + levelOf(dD).blink;
+  document.getElementById('subNight').textContent = 'Δ ' + (dN>=0?'+':'') + dN.toFixed(1) + ' dB · ' + levelOf(dN).blink;
+}
+document.getElementById('leq').oninput = function(e){
+  S.leq = parseFloat(e.target.value);
+  document.getElementById('leqV').textContent = S.leq.toFixed(1);
+  render06();
+};
+document.querySelectorAll('#siteBtns .btn').forEach(function(b){
+  b.onclick = function(){
+    document.querySelectorAll('#siteBtns .btn').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');
+    S.siteL = parseFloat(b.dataset.site);
+    render06();
+  };
+});
+
+/* ---- 15 组真实数据（features_all / 01 数据表） ---- */
+var D15 = [
+  ['S01','图书馆','早',61.4,55], ['S02','食堂','早',62.5,60],
+  ['S03','主干道','早',63.5,70], ['S04','运动场','早',61.5,60],
+  ['S05','实训室走廊','早',59.6,55],
+  ['S06','图书馆','中',61.2,55], ['S07','食堂','中',64.0,60],
+  ['S08','主干道','中',57.3,70], ['S09','运动场','中',60.8,60],
+  ['S10','实训室走廊','中',60.5,55],
+  ['S11','图书馆','晚',60.6,55], ['S12','食堂','晚',62.8,60],
+  ['S13','主干道','晚',60.3,70], ['S14','运动场','晚',63.1,60],
+  ['S15','实训室走廊','晚',59.2,55]
+];
+(function(){
+  var tb = document.getElementById('rpBody');
+  D15.forEach(function(r, i){
+    var tr = document.createElement('tr');
+    tr.id = 'rp' + i;
+    tr.innerHTML = '<td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td>' +
+                   '<td>' + r[3].toFixed(1) + '</td><td>' + r[4] + '</td>' +
+                   '<td>' + ((r[3]-r[4])>=0?'+':'') + (r[3]-r[4]).toFixed(1) + '</td>' +
+                   '<td style="color:' + ((r[3]-r[4])>0?'#dc2626':'#16a34a') + ';font-weight:600">' +
+                   ((r[3]-r[4])>0?'超标':'达标') + '</td>';
+    tb.appendChild(tr);
+  });
+})();
+
+var rpTimer = null;
+document.getElementById('btnReplay').onclick = function(){
+  var btn = this;
+  if (rpTimer) { clearInterval(rpTimer); rpTimer = null; btn.textContent = '▶ 播放 15 组'; return; }
+  var i = 0, over = 0, pass = 0;
+  document.querySelectorAll('#rpBody tr').forEach(function(tr){ tr.style.background = ''; });
+  btn.textContent = '⏸ 暂停';
+  rpTimer = setInterval(function(){
+    if (i >= D15.length){
+      clearInterval(rpTimer); rpTimer = null;
+      btn.textContent = '↻ 再放一次';
+      return;
+    }
+    var r = D15[i], d = r[3] - r[4];
+    var lv = levelOf(d);
+    paint(document.getElementById('lampDay'), lv);
+    document.getElementById('lampDay').textContent = lv.name;
+    S.leq = r[3]; S.siteL = r[4];
+    document.getElementById('leq').value = r[3];
+    document.getElementById('leqV').textContent = r[3].toFixed(1);
+    document.getElementById('capDay').textContent = r[4];
+    document.getElementById('capNight').textContent = r[4] - 10;
+    document.getElementById('subDay').textContent = 'Δ ' + (d>=0?'+':'') + d.toFixed(1) + ' dB';
+    paint(document.getElementById('lampNight'), levelOf(r[3] - (r[4]-10)));
+    document.getElementById('subNight').textContent = 'Δ ' + ((r[3]-(r[4]-10))>=0?'+':'') + (r[3]-(r[4]-10)).toFixed(1) + ' dB';
+
+    var tr = document.getElementById('rp' + i);
+    tr.style.background = '#eff6ff';
+    document.getElementById('rpNow').textContent = r[0] + ' ' + r[1] + ' ' + r[2] + '　Leq ' + r[3].toFixed(1) + ' / 限值 ' + r[4];
+    if (d > 0) over++; else pass++;
+    document.getElementById('rpCount').textContent = (i+1) + ' / 15';
+    document.getElementById('rpStat').textContent = '超标 ' + over + ' · 达标 ' + pass;
+    document.querySelector('#replayBar i').style.width = ((i+1)/15*100) + '%';
+    i++;
+  }, 420);
+};
+
+/* ================= P2：规则 ================= */
+var T = {STILL:1.5, STILL_AC:0.35, INFO:1.0, INFO_RMS:0.8,
+         RUN_RMS:10.0, RUN_CAD:2.0, RUN_MIN:6.0,
+         JOG_CAD:1.80, JOG_RMS:5.0,
+         DOWN_RMS:1.5, DIFF:0.035, SKEW:0.35, SKEW_W:0.20,
+         FAST_RMS:6.0, FAST_CAD:1.9, FAST_CAD_MIN:1.5, FAST_IMP:5.0,
+         HIGH_RMS:5.4, WALK:0.631};
+
+var PRESETS = [
+  {n:'静止（手机放桌上）', rms:0.85, cad:0.15, ac:0.12,  diff:0.010,  skew:0.05, truth:'静止'},
+  {n:'正常走（手提）',     rms:2.79, cad:1.28, ac:0.880, diff:-0.039, skew:-0.26, truth:'平地走'},
+  {n:'慢走（手提）',       rms:1.18, cad:1.39, ac:0.560, diff:0.036,  skew:0.62, truth:'平地走'},
+  {n:'上台阶',             rms:3.56, cad:1.30, ac:0.480, diff:-0.031, skew:-0.15, truth:'上台阶'},
+  {n:'快下楼',             rms:6.43, cad:1.76, ac:0.290, diff:0.035,  skew:0.25, truth:'下台阶'},
+  {n:'用力下楼',           rms:9.41, cad:1.61, ac:0.580, diff:0.064,  skew:0.63, truth:'下台阶'},
+  {n:'用力上楼',           rms:9.08, cad:1.47, ac:0.510, diff:0.043,  skew:0.24, truth:'上台阶'},
+  {n:'同学上楼',           rms:5.76, cad:1.51, ac:0.740, diff:0.029,  skew:0.22, truth:'上台阶'},
+  {n:'慢跑',               rms:5.95, cad:1.88, ac:0.690, diff:0.026,  skew:0.39, truth:'跑步'},
+  {n:'跑步',               rms:19.05,cad:2.40, ac:0.870, diff:0.100,  skew:1.20, truth:'跑步'}
+];
+
+function classify(f){
+  var steps = [], hit = -1;
+  function step(t, ok){ steps.push({t:t, ok:ok}); if (ok && hit < 0) hit = steps.length - 1; return ok; }
+
+  if (step('① 静止：RMS < 1.5 且 自相关 < 0.35', f.rms < T.STILL && f.ac < T.STILL_AC))
+    return {v:'静止', w:'能量极低，而且没有周期性 —— 只剩传感器噪声', steps:steps, hit:hit};
+  if (step('② 能量极低：RMS < 0.8 且 RMS×自相关 < 1.0', f.rms < T.INFO_RMS && f.rms*f.ac < T.INFO))
+    return {v:'平地走', w:'连步态都谈不上，但系统仍然给一个最接近的类（不拒答）', steps:steps, hit:hit};
+  if (step('③ 跑步：（步频 > 2.0 且 RMS > 6.0）或 RMS > 10', (f.cad > T.RUN_CAD && f.rms > T.RUN_MIN) || f.rms > T.RUN_RMS))
+    return {v:'跑步', w:'步频进了跑档，幅度也够', steps:steps, hit:hit};
+  if (step('③b 慢跑：步频 ≥ 1.80 且 RMS ≥ 5.0', f.cad >= T.JOG_CAD && f.rms >= T.JOG_RMS))
+    return {v:'跑步', w:'步频已进跑档、幅度没到 6.0 —— 慢跑型（平地走最高 4.67）', steps:steps, hit:hit};
+  if (step('④ 下台阶·尖峰型：正−负 > 0.035 且 偏度 > 0.35 且 RMS ≥ 1.5',
+           f.diff > T.DIFF && f.skew > T.SKEW && f.rms >= T.DOWN_RMS))
+    return {v:'下台阶', w:'触地冲击让波形右偏、正峰占比高', steps:steps, hit:hit};
+  var imp = f.cad ? f.rms / f.cad : 0;
+  if (step('④b 快下楼：RMS ≥ 6.0 且 1.5 ≤ 步频 < 1.9 且 每步冲量 < 5.0',
+           f.rms >= T.FAST_RMS && f.cad < T.FAST_CAD && f.cad >= T.FAST_CAD_MIN && imp < T.FAST_IMP))
+    return {v:'下台阶', w:'下得太快、冲击被腿缓冲掉，形状判据失效 —— 退回幅度', steps:steps, hit:hit};
+  if (step('④c 高幅必上楼：RMS ≥ 5.4', f.rms >= T.HIGH_RMS))
+    return {v:'上台阶', w:'走路实测最高只有 4.67，能到 5.4 以上的一定是上楼', steps:steps, hit:hit};
+  var s = f.ac + f.diff + T.SKEW_W * Math.max(0, f.skew);
+  if (step('⑤ 平地走：自相关 + 正负差 + 0.2×偏度⁺ ≥ 0.631', s >= T.WALK))
+    return {v:'平地走', w:'三样叠起来才分得开 —— 单看自相关会被持机习惯带偏', steps:steps, hit:hit, score:s};
+  return {v:'上台阶', w:'上面全不成立，落到兜底 —— 上楼的正负差常年偏低、也没有触地尖峰', steps:steps, hit:hit, score:s};
+}
+
+function readF(){
+  return {
+    rms:+document.getElementById('f_rms').value,
+    cad:+document.getElementById('f_cad').value,
+    ac:+document.getElementById('f_ac').value,
+    diff:+document.getElementById('f_diff').value,
+    skew:+document.getElementById('f_skew').value
+  };
+}
+function renderRule(){
+  var f = readF();
+  document.getElementById('v_rms').textContent  = f.rms.toFixed(2);
+  document.getElementById('v_cad').textContent  = f.cad.toFixed(2);
+  document.getElementById('v_ac').textContent   = f.ac.toFixed(3);
+  document.getElementById('v_diff').textContent = f.diff.toFixed(3);
+  document.getElementById('v_skew').textContent = f.skew.toFixed(2);
+
+  var r = classify(f);
+  document.getElementById('p2v').textContent = r.v;
+  document.getElementById('p2w').textContent = r.w;
+  document.getElementById('p2s').textContent = (typeof r.score === 'number')
+      ? r.score.toFixed(3) + (r.score >= T.WALK ? ' ≥ 0.631' : ' < 0.631') : '—';
+  document.getElementById('p2i').textContent = f.cad ? (f.rms/f.cad).toFixed(2) : '—';
+
+  var ul = document.getElementById('rules');
+  ul.innerHTML = '';
+  r.steps.forEach(function(s, i){
+    var li = document.createElement('li');
+    li.textContent = s.t;
+    li.className = (i === r.hit) ? 'hit' : (s.ok ? 'hit' : 'stop');
+    ul.appendChild(li);
+  });
+  if (r.v === '上台阶' && !r.steps[r.steps.length-1].ok){
+    var z = document.createElement('li');
+    z.className = 'hit';
+    z.textContent = '⑥ 兜底：以上都不成立 → 上台阶';
+    ul.appendChild(z);
+  }
+  drawRuler(r);
+}
+function drawRuler(r){
+  var box = document.getElementById('ruler');
+  var W = box.clientWidth || 900;
+  var lo = 0.40, hi = 0.95;
+  function X(v){ return Math.max(0, Math.min(W, (v - lo)/(hi - lo) * W)); }
+  var band = document.getElementById('rBand');
+  band.style.left  = X(0.596) + 'px';
+  band.style.width = Math.max(2, X(0.670) - X(0.596)) + 'px';
+  document.getElementById('rThr').style.left = X(T.WALK) + 'px';
+  var dot = document.getElementById('rDot'), lab = document.getElementById('rLab');
+  if (typeof r.score === 'number'){
+    dot.style.display = 'block';
+    dot.style.left = X(r.score) + 'px';
+    lab.style.display = 'block';
+    lab.style.left = X(r.score) + 'px';
+    lab.textContent = '你 = ' + r.score.toFixed(3);
+    lab.style.color = '#2563eb';
+    lab.style.fontWeight = '700';
+  } else {
+    dot.style.display = 'none';
+    lab.style.display = 'block';
+    lab.style.left = '50%';
+    lab.style.color = '';
+    lab.style.fontWeight = '';
+    lab.textContent = '这条被更早的规则接住了，没走到 ⑤';
+  }
+}
+['f_rms','f_cad','f_ac','f_diff','f_skew'].forEach(function(id){
+  document.getElementById(id).oninput = renderRule;
+});
+var pbox = document.getElementById('presets');
+PRESETS.forEach(function(p, i){
+  var b = document.createElement('button');
+  b.className = 'btn' + (i === 1 ? ' on' : '');
+  b.textContent = p.n;
+  b.onclick = function(){
+    document.querySelectorAll('#presets .btn').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');
+    ['rms','cad','ac','diff','skew'].forEach(function(k){
+      document.getElementById('f_' + k).value = p[k];
+    });
+    renderRule();
+  };
+  pbox.appendChild(b);
+});
+
+/* ================= P3：散点 ================= */
+var VIB = [
+  {n:'C1 一档',  g:'正常', hor:0.0381, ver:0.1918, f:'87.1 Hz'},
+  {n:'C1 一档',  g:'正常', hor:0.0203, ver:0.0954, f:'87.2 Hz'},
+  {n:'C1 一档',  g:'正常', hor:0.0682, ver:0.2892, f:'86.9 Hz'},
+  {n:'C2 三档',  g:'正常', hor:0.0201, ver:0.0882, f:'28.3 Hz'},
+  {n:'C2 三档',  g:'正常', hor:0.0364, ver:0.0952, f:'28.3 Hz'},
+  {n:'C2 三档',  g:'正常', hor:0.0473, ver:0.0964, f:'225.4 Hz'},
+  {n:'C3 五档',  g:'正常', hor:0.0967, ver:0.1159, f:'228.6 Hz'},
+  {n:'C3 五档',  g:'正常', hor:0.1027, ver:0.0928, f:'229.3 Hz'},
+  {n:'C3 五档',  g:'正常', hor:0.0952, ver:0.0749, f:'229.4 Hz'},
+  {n:'C4 胶带',  g:'失衡', hor:0.1247, ver:0.5001, f:'29.2 Hz'},
+  {n:'C4 胶带',  g:'失衡', hor:0.1449, ver:0.6031, f:'29.0 Hz'},
+  {n:'C4 胶带',  g:'失衡', hor:0.0787, ver:0.5904, f:'29.4 Hz'},
+  {n:'C5 遮挡',  g:'遮挡', hor:0.0240, ver:0.2892, f:'90.4 Hz'},
+  {n:'C5 遮挡',  g:'遮挡', hor:0.0352, ver:0.3345, f:'90.1 Hz'},
+  {n:'C5 遮挡',  g:'遮挡', hor:0.0665, ver:0.3768, f:'238.4 Hz'}
+];
+(function(){
+  var cv = document.getElementById('scatter');
+  var ctx = cv.getContext('2d');
+  var W = cv.width, H = cv.height;
+  var L = 92, R = W - 26, T = 34, B = H - 56;
+  var xlo = 0.017, xhi = 0.18, ylo = 0.06, yhi = 0.70;
+  function X(v){ return L + (Math.log10(v) - Math.log10(xlo))/(Math.log10(xhi)-Math.log10(xlo))*(R-L); }
+  function Y(v){ return B - (Math.log10(v) - Math.log10(ylo))/(Math.log10(yhi)-Math.log10(ylo))*(B-T); }
+
+  ctx.clearRect(0,0,W,H);
+  /* 故障带 */
+  ctx.fillStyle = '#fef2f2';
+  ctx.fillRect(L, T, R-L, Y(0.20)-T);
+  ctx.strokeStyle = '#fca5a5'; ctx.setLineDash([5,4]); ctx.beginPath();
+  ctx.moveTo(L, Y(0.20)); ctx.lineTo(R, Y(0.20)); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle = '#dc2626'; ctx.font = 'bold 13px "Microsoft YaHei",sans-serif';
+  ctx.fillText('故障区（垂直 RMS ≥ 0.20）', L + 10, T + 18);
+
+  /* 网格 */
+  ctx.strokeStyle = '#eef2f7'; ctx.lineWidth = 1;
+  [0.02,0.03,0.05,0.08,0.12,0.18].forEach(function(v){
+    ctx.beginPath(); ctx.moveTo(X(v), T); ctx.lineTo(X(v), B); ctx.stroke();
+    ctx.fillStyle = '#94a3b8'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(v.toFixed(2), X(v), B + 18);
+  });
+  [0.07,0.10,0.15,0.25,0.40,0.60].forEach(function(v){
+    ctx.beginPath(); ctx.moveTo(L, Y(v)); ctx.lineTo(R, Y(v)); ctx.stroke();
+    ctx.fillStyle = '#94a3b8'; ctx.font = '11px sans-serif'; ctx.textAlign = 'right';
+    ctx.fillText(v.toFixed(2), L - 8, Y(v) + 4);
+  });
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#475569'; ctx.font = '12px "Microsoft YaHei",sans-serif';
+  ctx.fillText('垂直 RMS　m/s²（对数）', 10, 20);
+  ctx.textAlign = 'center';
+  ctx.fillText('水平 RMS　m/s²（对数）', (L+R)/2, H - 14);
+
+  /* 点 */
+  var COL = {'正常':'#2563eb', '失衡':'#dc2626', '遮挡':'#7c3aed'};
+  window._pts = [];
+  VIB.forEach(function(p){
+    var x = X(p.hor), y = Y(p.ver);
+    ctx.beginPath(); ctx.arc(x, y, 7, 0, Math.PI*2);
+    ctx.fillStyle = COL[p.g]; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.lineWidth = 2; ctx.strokeStyle = '#fff'; ctx.stroke();
+    window._pts.push({x:x, y:y, p:p});
+  });
+
+  /* hover */
+  var tip = document.createElement('div');
+  tip.style.cssText = 'position:fixed;pointer-events:none;background:#0f172a;color:#fff;' +
+    'font-size:12px;padding:5px 9px;border-radius:6px;opacity:0;transition:opacity .12s;z-index:9';
+  document.body.appendChild(tip);
+  cv.onmousemove = function(e){
+    var r = cv.getBoundingClientRect();
+    var sx = (e.clientX - r.left) * (W / r.width);
+    var sy = (e.clientY - r.top)  * (H / r.height);
+    var best = null, bd = 1e9;
+    window._pts.forEach(function(o){
+      var d = Math.hypot(o.x - sx, o.y - sy);
+      if (d < bd){ bd = d; best = o; }
+    });
+    if (best && bd < 16){
+      tip.textContent = best.p.n + '　水平 ' + best.p.hor.toFixed(4) +
+                        '　垂直 ' + best.p.ver.toFixed(4) + '　主峰 ' + best.p.f;
+      tip.style.left = (e.clientX + 14) + 'px';
+      tip.style.top  = (e.clientY - 34) + 'px';
+      tip.style.opacity = 1;
+    } else {
+      tip.style.opacity = 0;
+    }
+  };
+  cv.onmouseleave = function(){ tip.style.opacity = 0; };
+})();
+
+/* ================= 起手 ================= */
+render06();
+renderRule();
+window.addEventListener('resize', function(){ if (document.getElementById('p2').classList.contains('on')) renderRule(); });
+</script>
+</body>
+</html>
