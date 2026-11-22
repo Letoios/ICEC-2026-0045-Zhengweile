@@ -26,11 +26,13 @@ RED = "#C00000"
 
 # 点位 → (功能区, 昼间限值, 在平面图上的相对坐标)
 SITES = {
-    "图书馆":     ("1 类", 55, 0.528, 0.529, "A2 图书馆"),
-    "食堂":       ("2 类", 60, 0.508, 0.317, "F1 天香园"),
-    "主干道":     ("4a 类", 70, 0.448, 0.596, "行知中路 × 行知南路"),
-    "运动场":     ("2 类", 60, 0.352, 0.500, "体育场"),
-    "实训室走廊": ("1 类", 55, 0.452, 0.388, "B4 天工楼"),
+    # 2026-11-23 修正：食堂实测点是 F2 百味园（不是 F1 天香园）；
+    # 主干道的点原来压在 B1 楼上，改到行知中路路面；实训室走廊改到 B4 天工楼块心。
+    "图书馆":     ("1 类", 55, 0.528, 0.529, "A2 图书馆",   0.548, 0.470),
+    "食堂":       ("2 类", 60, 0.262, 0.357, "F2 百味园",   0.283, 0.298),
+    "主干道":     ("4a 类", 70, 0.4583, 0.4030, "行知中路（B1·B4·F1 之间）", 0.352, 0.300),
+    "运动场":     ("2 类", 60, 0.352, 0.500, "体育场",      0.372, 0.548),
+    "实训室走廊": ("1 类", 55, 0.492, 0.432, "B4 天工楼 走廊", 0.512, 0.442),
 }
 ORDER = ["图书馆", "食堂", "主干道", "运动场", "实训室走廊"]
 
@@ -60,7 +62,7 @@ def main():
     src = src.resize((W, H), Image.LANCZOS)
 
     TOP = 96                       # 顶部标题带
-    BOT = 118                      # 底部图注带
+    BOT = 300                      # 底部：5 行点位表 + 两行图注
     img = Image.new("RGB", (W, H + TOP + BOT), "white")
     img.paste(src, (0, TOP))
     d = ImageDraw.Draw(img)
@@ -73,7 +75,7 @@ def main():
 
     # ---- 标记 ----
     for loc in ORDER:
-        cls, lim, fx, fy, note = SITES[loc]
+        cls, lim, fx, fy, note, lx, ly = SITES[loc]
         x, y = int(fx * W), int(fy * H) + TOP
         per = rows[loc]
         ds = [per[p]["over"] for p in ("早", "中", "晚")]
@@ -84,33 +86,53 @@ def main():
         d.ellipse([x - r - 5, y - r - 5, x + r + 5, y + r + 5], fill="white")
         d.ellipse([x - r, y - r, x + r, y + r], fill=col, outline="#333333", width=2)
 
-        # 标签：点位名 + 三时段 Δ
-        head = "%s（%s）" % (loc, note)
-        tail = "　".join("%+.1f" % v for v in ds)
-        tw1 = d.textbbox((0, 0), head, font=F(20, True))
-        tw2 = d.textbbox((0, 0), tail, font=F(18))
-        bw = max(tw1[2] - tw1[0], tw2[2] - tw2[0]) + 24
-        bh = 62
-        # 上/左方向避让：靠右的放左边
-        bx = x + r + 12 if fx < 0.72 else x - r - 12 - bw
-        by = y - bh // 2
-        d.rounded_rectangle([bx, by, bx + bw, by + bh], radius=8,
-                            fill="white", outline="#B4C0D3", width=2)
-        d.text((bx + 12, by + 6), head, font=F(20, True), fill=NAVY)
-        d.text((bx + 12, by + 34), tail, font=F(18), fill="#333333")
+        # 小标签：点位名贴在圆点旁，白描边保证任何底色上都能读
+        nm = loc
+        dxs = {"图书馆": -1, "食堂": -1, "主干道": 1, "运动场": -1, "实训室走廊": 1}[loc]
+        tx = x + (r + 8) * dxs
+        ty = y - 8
+        d.text((tx, ty), nm, font=F(19, True), fill="#1F3864",
+               anchor=("lm" if dxs > 0 else "rm"),
+               stroke_width=4, stroke_fill="white")
 
-        # 简单引线
-        if fx < 0.72:
-            d.line([x + r + 4, y, bx, y], fill="#B4C0D3", width=2)
-        else:
-            d.line([x - r - 4, y, bx + bw, y], fill="#B4C0D3", width=2)
+    # ---- 底部：5 行点位表 ----
+    yt = H + TOP + 18
+    cols = [44, 200, 640, 730, 820, 910, 1050]
+    heads = ["点位", "位置", "早 Δ", "中 Δ", "晚 Δ", "判定", "最差"]
+    d.text((44, yt - 6), "15 组实测：5 点位 × 早/中/晚", font=F(22, True), fill=NAVY)
+    yh = yt + 34
+    d.line([cols[0], yh + 30, W - 44, yh + 30], fill=NAVY, width=2)
+    for k, hd in enumerate(heads):
+        anchor = "lm" if k < 2 else "mm"
+        d.text((cols[k], yh + 12), hd, font=F(18, True), fill=NAVY, anchor=anchor)
 
-    # ---- 底部图注 ----
-    yb = H + TOP + 16
-    d.text((44, yb), "读法：三时段数值依次为 早 / 中 / 晚 的 Δ（Leq − 该点位昼间限值，dB）。"
-                     "主干道是 4a 类、限值 70 dB，因此负值最多；图书馆与实训室走廊是 1 类、限值 55 dB，最容易超过。",
+    ry = yh + 46
+    verdict_ok = 0
+    for loc in ORDER:
+        cls, lim, fx, fy, note = SITES[loc][:5]
+        per = rows[loc]
+        ds = [per[p]["over"] for p in ("早", "中", "晚")]
+        n_over = sum(1 for v in ds if v > 0)
+        verdict_ok += (len(ds) - n_over)
+        vert = "达标 %d / 超标 %d" % (len(ds) - n_over, n_over)
+        col = RED if n_over else "#1F7A3D"
+        d.text((cols[0], ry), loc, font=F(19, True), fill="#1F3864", anchor="lm")
+        d.text((cols[1], ry), "%s（%s · 限值 %d dB）" % (note, cls, lim),
+               font=F(17), fill="#555555", anchor="lm")
+        for k, v in enumerate(ds):
+            d.text((cols[2 + k], ry), "%+.1f" % v, font=F(19, True),
+                   fill=(RED if v > 0 else "#1F7A3D"), anchor="mm")
+        d.text((cols[5], ry), vert, font=F(18, True), fill=col, anchor="mm")
+        d.text((cols[6], ry), "%+.1f" % max(ds), font=F(19, True),
+               fill=dcolor(max(ds)), anchor="mm")
+        ry += 40
+
+    # ---- 两行图注 ----
+    d.line([44, ry + 6, W - 44, ry + 6], fill="#D6DEEA", width=1)
+    d.text((44, ry + 18), "Δ = Leq − 该点位昼间限值（dB）。主干道是 4a 类、限值 70 dB，因此负值最多；"
+                          "图书馆与实训室走廊是 1 类、限值 55 dB，最容易超过。",
            font=F(17), fill=GREY)
-    d.text((44, yb + 30), "15 组中 12 组超标、3 组达标（达标全部是主干道）。"
+    d.text((44, ry + 48), "15 组中 12 组超标、3 组达标（达标全部是主干道）。"
                           "同一批声级若改按夜间限值评价，15 组会全部超标——差的那 10 dB 全部来自限值换挡。",
            font=F(17), fill=RED)
 

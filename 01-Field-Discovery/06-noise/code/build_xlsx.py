@@ -1,8 +1,8 @@
 ﻿# -*- coding: utf-8 -*-
 r"""课题06 交付用 Excel：15 组声学数据表 + 雷达图 + 标准依据 + 光效参数。
 
-输入 D:\deepseek工作\noise06\build\stats.json
-输出 D:\deepseek工作\noise06\deliver\数据\课题06_十五组声学数据表与雷达图.xlsx
+输入 noise06/build/stats.json
+输出 noise06/deliver/数据/课题06_十五组声学数据表与雷达图.xlsx
 """
 import os, json
 

@@ -1,8 +1,8 @@
 ﻿# -*- coding: utf-8 -*-
 r"""课题06 全部插图（Pillow 手绘，不依赖 matplotlib）。
 
-输入 noise06\build\stats.json + meta.json
-输出 noise06\deliver\figs\*.png
+输入 noise06/build/stats.json + meta.json
+输出 noise06/deliver/figs/*.png
 """
 import os, json, math, glob, zipfile, csv
 
@@ -172,7 +172,7 @@ def fig3():
     d = ImageDraw.Draw(img)
     d.text((50, 30), "课题 06　同一批声级，两把尺子——22:00 限值降 10 dB，声级只动了不到 2 dB",
            font=F(21, True), fill=NAVY)
-    d.text((50, 68), "左：傍晚与白天的声级几乎相同　｜　右：标准在 22:00 把限值又压了一档",
+    d.text((50, 68), "左：同一批点位的 早 vs 晚 实测声级（几乎没变）　｜　右：同一条声级换上夜间限值这把尺子",
            font=F(13), fill=GREY)
 
     # 左图：分组柱
@@ -184,7 +184,7 @@ def fig3():
         y = B - (gv - vmin) / (vmax - vmin) * (B - T)
         d.line([(L, y), (R, y)], fill=GRID)
         d.text((L - 10, y), str(gv), font=F(11), fill=LGREY, anchor="rm")
-    d.text((L - 46, (T + B) / 2), "dB(A)", font=F(12), fill=GREY, anchor="mm")
+    d.text((L - 46, (T + B) / 2), "dB（未计权）", font=F(12), fill=GREY, anchor="mm")
 
     for j, loc in enumerate(ORDER):
         e, nn = IDX[("早", loc)], IDX[("晚", loc)]
@@ -210,8 +210,9 @@ def fig3():
         d.rectangle([x2, y - 6, x1, y + 8], fill="#FBDCE0")
         d.text((x2 - 8, y + 1), "夜间限值 %d" % nn["nightLimit"], font=F(11), fill=RED, anchor="rm")
         d.text((x1 + 8, y + 1), "昼间限值 %d" % e["dayLimit"], font=F(11), fill="#8A5A00", anchor="lm")
-        d.text((R2 - 6, y + 26), "Δ 从 %+.1f 变 %+.1f（声级只变 %+.1f）"
-               % (e["over"], nn["over"], nn["leq"] - e["leq"]), font=F(11), fill=GREY, anchor="rt")
+        d.text((R2 - 6, y + 26), "同一声级 %.1f dB：昼间口径 %+.1f → 夜间口径 %+.1f"
+               % (e["leq"], e["leq"] - e["dayLimit"], e["leq"] - nn["nightLimit"]),
+               font=F(11), fill=GREY, anchor="rt")
 
     d.text((50, H - 40), "这就是「制度性阶跃」：22:00 一到，同样的声级会因为限值换档而由绿变红——而那时校园已经基本没人。"
                          "光效逻辑必须为此单独处理（见《创新体系》第 3 节）。", font=F(13), fill=RED)
@@ -320,7 +321,7 @@ def fig5():
     d.rounded_rectangle([60, 400, 460, 510], radius=14, fill="#B91C1C", outline="white", width=3)
     ctext(d, 260, 436, "SP　瞬时冲击", F(20, True), "white")
     ctext(d, 260, 474, "红白快闪 5 Hz · 持续 3 s", F(15), "white")
-    d.text((60, 524), "触发：Lmax ≥ 85 dB(A)，不参与平滑、不排队去抖", font=F(12), fill=RED)
+    d.text((60, 524), "触发：Lmax ≥ 85 dB（未计权；GBZ 2.2 原文为 A 计权），不参与平滑、不排队去抖", font=F(12), fill=RED)
 
     d.rounded_rectangle([520, 400, 1280, 510], radius=12, fill="#F4F7FB", outline="#C9D3E3", width=2)
     d.text((544, 420), "优先级仲裁：SP > S4 > S3 > S2 > S1 > S0", font=F(15, True), fill=NAVY)
@@ -379,7 +380,7 @@ def fig6():
         y = B - (gv - vmin) / (vmax - vmin) * (B - T)
         d.line([(L, y), (R, y)], fill=GRID)
         d.text((L - 10, y), str(gv), font=F(11), fill=LGREY, anchor="rm")
-    d.text((L - 46, (T + B) / 2), "dB(A)", font=F(12), fill=GREY, anchor="mm")
+    d.text((L - 46, (T + B) / 2), "dB（未计权）", font=F(12), fill=GREY, anchor="mm")
 
     def X(t):
         return L + t / T * (R - L)
