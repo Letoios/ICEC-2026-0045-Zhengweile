@@ -1,2 +1,8 @@
-__pycache__/
+﻿__pycache__/
 *.pyc
+# --- 大文件不入库（2026-11-22）---
+# 依据提交页自检清单第 ② 条：超 25MB 的演示视频、WAV 音频集、大文件包，走第 4 步分片上传
+02-20Days-Challenge/03-fan-vibration/data/**/*.wav
+02-20Days-Challenge/03-fan-vibration/data/**/*.mp3
+02-20Days-Challenge/03-fan-vibration/data/盲测视频.mp4
+01-Field-Discovery/08-gait/data/
